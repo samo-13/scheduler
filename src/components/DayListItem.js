@@ -36,10 +36,36 @@ export default function DayListItem(props) {
       'day-list__item--full': props.spots === 0 // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w17/activities/850?journey_step=54&workbook=22
   })
 
+  // Write a function called formatSpots in the DayListItem component that will format the props.spots to make our tests pass. 
+  // (Note that the tests expect certain output and they are case sensitive!)
+
+  // it("renders 'no spots remaining' when there are 0 spots", () => {
+  //   const { getByText } = render(<DayListItem name="Monday" spots={0} />);
+  //   expect(getByText("no spots remaining")).toBeInTheDocument();
+  // });
+  
+  // it("renders '1 spot remaining' when there is 1 spot", () => {
+  //   const { getByText } = render(<DayListItem name="Monday" spots={1} />);
+  //   expect(getByText("1 spot remaining")).toBeInTheDocument();
+  // });
+
+  const formatSpots = (spots) => {
+    if (spots <= 0) {
+      console.log("no spots remaining")
+      return `no spots remaining`;
+    } else if (spots === 1) {
+      console.log("1 spots remaining")
+      return "1 spot remaining"
+    } else { 
+      console.log(`${spots} spots remaining`)
+      return `${spots} spots remaining`
+    }
+  };
+
   return (
     <li className={dayListClass} onClick={() => props.setDay(props.name)}>
       <h2 className="text--regular">{props.name}</h2>
-      <h3 className="text--light">{props.spots} spots remaining</h3>
+      <h3 className="text--light">{formatSpots(props.spots)}</h3>
     </li>
   );
 };
