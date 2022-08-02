@@ -29,17 +29,17 @@ export default function DayList(props) {
     const dayList = props.days.map(day => {
       return (
         <DayListItem
-        key={props.day.id}
-        name={props.day.name} 
-        spots={props.day.spots} 
-        selected={props.day.name === props.day}
+        key={day.id}
+        name={day.name} 
+        spots={day.spots} 
+        selected={day.name === props.day}
         setDay={props.setDay} 
       />)
     });
     return (
       <ul className="DayList">
         <h1>Current Days</h1>
-        {DayListItem}
+        {dayList}
       </ul>
   )
 };
