@@ -1,5 +1,5 @@
 import React from "react";
-import "components/InterviwerListItem.scss";
+import "components/InterviewerListItem.scss";
 import classNames from "classnames";
 
 // A single interviewer object is structured like this:
@@ -28,16 +28,25 @@ import classNames from "classnames";
 // Create the <InterviewerListItem> file and set up a React component that returns the base HTML below. 
 // Make sure the component is exported.
 
-export default function InterviewListItem(props) {
+export default function InterviewerListItem(props) {
+
+  // The SCSS file generates a class called interviewers__item--selected that should only be applied if an interviewer is selected.
+  const interviewerListClass = classNames(
+    'interviewers__item', {
+      'interviewers__item--selected': props.selected
+    }
+  );
 
   return (
-  <li className="interviewers__item">
-    <img
-      className="interviewers__item-image"
-      src="https://i.imgur.com/LpaY82x.png"
-      alt="Sylvia Palmer"
-    />
-    Sylvia Palmer
-  </li>
+    <li className={interviewerListClass}>
+      <img
+        className="interviewers__item-image"
+        src={props.avatar}
+        alt={props.id}
+      />
+      {props.selected && props.name}
+    </li>
   )
 };
+
+// for {props.selected && props.name} see https://reactjs.org/docs/conditional-rendering.html
