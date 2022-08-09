@@ -1,5 +1,6 @@
 import React from "react";
 import "components/InterviewerListItem.js";
+import "components/InterviewerList.scss";
 // import classNames from "classnames";
 
 // ------------------------------------------------------------------------
@@ -23,7 +24,7 @@ import "components/InterviewerListItem.js";
 // ------------------------------------------------------------------------
 
 export default function InterviewerList(props) {
-  
+
   return (
   <section className="interviewers">
     <h4 className="interviewers__header text--light">Interviewer</h4>
