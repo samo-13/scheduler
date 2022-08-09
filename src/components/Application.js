@@ -1,7 +1,8 @@
 // This creates an object named React which contains methods necessary to use the React library
-import React from "react";
+import React, { useState } from 'react';
 import "components/Application.scss";
 import DayList from "components/DayList.js"
+
 
 const days = [
   {
