@@ -37,9 +37,6 @@ export default function DayList(props) {
       />)
     });
     return (
-      <ul className="DayList">
-        <h1>Current Days</h1>
-        {dayList}
-      </ul>
+<ul>{dayList}</ul>
   )
 };
