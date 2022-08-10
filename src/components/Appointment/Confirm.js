@@ -1,6 +1,6 @@
 import React from "react";
 import "components/Appointment/styles.scss";
-import "components/Button";
+import Button from "components/Button";
 // import Header from "components/Appointment/Header.js";
 // import classNames from "classnames";
 
@@ -15,8 +15,8 @@ export default function Confirm(props) {
     <main className="appointment__card appointment__card--confirm">
       <h1 className="text--semi-bold">Delete the appointment?</h1>
       <section className="appointment__actions">
-        <Button danger>Cancel</Button>
-        <Button danger>Confirm</Button>
+        <Button danger onClick={props.onCancel}>Cancel</Button>
+        <Button danger onClick={props.onConfirm}>Confirm</Button>
       </section>
     </main>
   )
