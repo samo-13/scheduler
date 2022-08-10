@@ -4,6 +4,10 @@ import "components/Appointment/styles.scss";
 // import Header from "components/Appointment/Header.js";
 // import classNames from "classnames";
 
+// Our <Status> component only needs to accept the following props:
+
+// --- message:String eg. "Deleting"
+
 export default function Status(props) {
   return (
     <main className="appointment__card appointment__card--status">
