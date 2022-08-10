@@ -9,7 +9,8 @@ import InterviewerListItem from "components/InterviewerListItem.js";
 // <InterviewerList> receives three props:
 
 // --- interviewers:array - an array of objects as seen above
-// --- </InterviewerList>setInterviewer:function - a function that accepts an interviewer id. This function will simply be passed down to the <InterviewerListItem>
+// --- </InterviewerList>setInterviewer:function - a function that accepts an interviewer id. 
+//    --- This function will simply be passed down to the <InterviewerListItem>
 // --- </InterviewerListItem>interviewer:number - a number that represents the id of the currently selected interviewer
 
 // ------------------------------------------------------------------------
@@ -31,15 +32,16 @@ export default function InterviewerList(props) {
       key={interviewer.id}
       name={interviewer.name}
       avatar={interviewer.avatar}
+      selected={interviewer.name === props.interviewer}
+      setInterviewer={props.setInterviewer}
     />)
   });
 
   return (
-  <section className="interviewers">
-    <h4 className="interviewers__header text--light">Interviewer</h4>
-    <ul className="interviewers__list">{interviewerList}</ul>
-    
-  </section>
+    <section className="interviewers">
+      <h4 className="interviewers__header text--light">Interviewer</h4>
+      <ul className="interviewers__list">{interviewerList}</ul>
+    </section>
   )
 };
 
