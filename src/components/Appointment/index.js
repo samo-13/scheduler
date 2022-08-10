@@ -1,6 +1,6 @@
 import React from "react";
-import "components/styles.scss";
-// import DayListItem from "components/DayListItem.js";
+import "components/Appointment/styles.scss";
+import Header from "components/Appointment/Header.js";
 // import classNames from "classnames";
 
 export default function Appointment(props) {
