@@ -17,7 +17,7 @@ export default function Error(props) {
         <h3 className="text--light">Could not delete appointment</h3>
       </section>
       <img
-        className="appointment__error-close"
+        className="appointment__error-close" onClick={props.onClose}
         src="images/close.png"
         alt="Close"
       />
