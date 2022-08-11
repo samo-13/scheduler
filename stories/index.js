@@ -182,3 +182,4 @@ storiesOf("Appointment", module)
   .add("Error", () => <Error onClose={action("onClose")}/>)
 
   .add("Create", () => <Form interviewers={interviewers} onSave={action("onSave")} onCancel={action("onCancel")}/>)
+  .add("Edit", () => <Form name='Sarah Moss' interviewers={interviewers} interviewer={1} onSave={action("onSave")} onCancel={action("onCancel")}/>)

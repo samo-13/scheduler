@@ -78,11 +78,11 @@ export default function Form(props) {
             name="name"
             type="text"
             placeholder="Enter Student Name"
+            value={props.name}
           />
         </form>
         <InterviewerList 
           interviewers={props.interviewers} 
-          interviewer='3'
         />
       </section>
       <section className="appointment__card-right">
@@ -98,3 +98,4 @@ export default function Form(props) {
 // DEV NOTES
 // --- https://reactjs.org/docs/forms.html
 // --- https://www.w3schools.com/react/react_forms.asp
+// --- https://bobbyhadz.com/blog/react-get-form-input-value-on-submit --- USE VALUE
