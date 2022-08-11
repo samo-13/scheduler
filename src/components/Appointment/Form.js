@@ -65,7 +65,6 @@ export default function Form(props) {
     // student:String
     // interviewers:Array
     // interviewer:Number
-
     // onSave:Function
     // onCancel:Function
 
@@ -80,9 +79,9 @@ export default function Form(props) {
             className="appointment__create-input text--semi-bold"
             name="name"
             type="text"
-            placeholder="Enter Student Name"
-            onChange={(event) => setStudent(event.target.value)}
             value={student}
+            onChange={(event) => setStudent(event.target.value)}
+            placeholder="Enter Student Name"
           />
         </form>
         <InterviewerList 
