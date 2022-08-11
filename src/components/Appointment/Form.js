@@ -69,6 +69,9 @@ export default function Form(props) {
     // onSave:Function
     // onCancel:Function
 
+  const [student, setStudent] = useState(props.student || ""); // The solution uses the JavaScript || operator which will evaluate to props.student if it is truthy, if undefined then it will use the empty string.
+  const [interviewer, setInterviewer] = useState(props.interviewer || null); // Same as the above for props.interviewer and null.
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -78,11 +81,11 @@ export default function Form(props) {
             name="name"
             type="text"
             placeholder="Enter Student Name"
-            value={props.name}
+            value={student}
           />
         </form>
         <InterviewerList 
-          interviewers={props.interviewers} 
+          interviewers={props.interviewers} interviewer={interviewer}
         />
       </section>
       <section className="appointment__card-right">
@@ -98,4 +101,5 @@ export default function Form(props) {
 // DEV NOTES
 // --- https://reactjs.org/docs/forms.html
 // --- https://www.w3schools.com/react/react_forms.asp
+// --- https://flex-web.compass.lighthouselabs.ca/c363aaf6-a93d-4664-ac46-032655e9460a --- CONTROLLED COMPONENTS
 // --- https://bobbyhadz.com/blog/react-get-form-input-value-on-submit --- USE VALUE
