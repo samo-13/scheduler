@@ -1,7 +1,7 @@
 import React from "react";
 import "components/Appointment/styles.scss";
 import Button from "components/Button";
-import InterviewerList from "components/InterviewList"
+import InterviewerList from "components/InterviewerList"
 // import Header from "components/Appointment/Header.js";
 // import classNames from "classnames";
 
@@ -41,7 +41,34 @@ import InterviewerList from "components/InterviewList"
 
 // -------------------------------------------------------------------------------------------
 
-export default function Error(props) {
+// Adding the Create and Edit Stories
+// Our <Form> component has two visual states depending on if the user is creating a new appointment or editing an existing appointment.
+// We'll need to create stories that pass the correct props for each of these modes.
+
+// As part of our Edit story, the <Form> component should take the following props:
+
+// student:String
+// interviewer:Number
+// interviewers:Array
+// onSave:Function
+// onCancel:Function
+
+// As part of our Create story, the <Form> component should take the following props:
+
+// interviewers:Array
+// onSave:Function
+// onCancel:Function
+
+// -------------------------------------------------------------------------------------------
+
+export default function Form(props) {
+    // student:String
+    // interviewers:Array
+    // interviewer:Number
+
+    // onSave:Function
+    // onCancel:Function
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -51,22 +78,23 @@ export default function Error(props) {
             name="name"
             type="text"
             placeholder="Enter Student Name"
-            /*
-              This must be a controlled component
-              your code goes here
-            */
           />
         </form>
         <InterviewerList 
-          /* your code goes here */
+          interviewers={props.interviewers} 
+          interviewer='3'
         />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger {/* your code goes here */}>Cancel</Button>
-          <Button confirm {/* your code goes here */}>Save</Button>
+          <Button danger onClick={props.onCancel}>Cancel</Button>
+          <Button confirm onClick={props.onSave}>Save</Button>
         </section>
       </section>
     </main>
   )
 };
+
+// DEV NOTES
+// --- https://reactjs.org/docs/forms.html
+// --- https://www.w3schools.com/react/react_forms.asp
