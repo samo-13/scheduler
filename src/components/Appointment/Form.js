@@ -80,6 +80,14 @@ export default function Form(props) {
     )
   };
 
+  // Add a cancel function to the <Form> component that calls reset() and props.onCancel. We should also update our Form component so it's called when a user clicks the Cancel button.
+  const cancel = function() {
+    return (
+      reset(),
+      props.onCancel
+    )
+  };
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
