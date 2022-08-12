@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from 'react' // https://flex-web.compass.lighthouselabs.ca/570ca4d6-b121-4737-b990-77521c023045
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import "index.scss";
@@ -15,7 +15,6 @@ import Confirm from "components/Appointment/Confirm.js";
 import Status from "components/Appointment/Status.js";
 import Error from "components/Appointment/Error.js";
 import Form from "components/Appointment/Form.js";
-
 
 // ------------------------------------------------------------------------------------
 // BUTTONS
