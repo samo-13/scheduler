@@ -180,6 +180,5 @@ storiesOf("Appointment", module)
   .add("Confirm", () => <Confirm onConfirm={action("onConfirm")} onCancel={action("onCancel")}/>) 
   .add("Status", () => <Status />)
   .add("Error", () => <Error onClose={action("onClose")}/>)
-
   .add("Create", () => <Form interviewers={interviewers} onSave={action("onSave")} onCancel={action("onCancel")}/>)
   .add("Edit", () => <Form name='Sarah Moss' interviewers={interviewers} interviewer={1} onSave={action("onSave")} onCancel={action("onCancel")}/>)
