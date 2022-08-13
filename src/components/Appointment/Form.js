@@ -67,7 +67,7 @@ export default function Form(props) {
     // interviewer:Number
     // onSave:Function
     // onCancel:Function
-
+  console.log('props:', props)
   const [student, setStudent] = useState(props.student || ""); // The solution uses the JavaScript || operator which will evaluate to props.student if it is truthy, if undefined then it will use the empty string.
   const [interviewer, setInterviewer] = useState(props.interviewer || null); // Same as the above for props.interviewer and null.
   console.log('student:', student);
@@ -107,7 +107,7 @@ export default function Form(props) {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={props.onSave}>Save</Button>
+          <Button confirm onClick={() => props.onSave(student, interviewer)}>Save</Button>
         </section>
       </section>
     </main>
