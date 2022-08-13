@@ -7,6 +7,9 @@ import Empty from "components/Appointment/Empty.js";
 
 export default function Appointment(props) {
   return (
-    <article className="appointment"></article>
+    
+    <article className="appointment">
+      <Header time={props.time}></Header>
+    </article>
   )
 }
