@@ -7,13 +7,12 @@ import Empty from "components/Appointment/Empty.js";
 
 export default function Appointment(props) {
   return (
-    
     <article className="appointment">
       <Header time={props.time}></Header>
       {
         (props.interview)
-          ? <Show> Truthy </Show> 
-          : <Empty> Falsy </Empty> 
+          ? <Show student={props.student} interviewer={props.interviewer}></Show> 
+          : <Empty></Empty> 
       }
     </article>
   )
