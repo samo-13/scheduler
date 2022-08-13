@@ -10,6 +10,11 @@ export default function Appointment(props) {
     
     <article className="appointment">
       <Header time={props.time}></Header>
+      {
+        (props.interview)
+          ? <Show> Truthy </Show> 
+          : <Empty> Falsy </Empty> 
+      }
     </article>
   )
 }
