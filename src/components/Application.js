@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import "components/Application.scss";
 import DayList from "components/DayList.js"
 // import { statement_timeout } from 'pg/lib/defaults';
-import Appointment from "components/Appointment"
+import "components/Appointment"
+import Appointment from "components/Appointment/index.js"
 
 // ----------------------------------------------------------------
 
@@ -68,10 +69,24 @@ const days = [
 
 // ----------------------------------------------------------------
 
+const appointmentsTest = Object.values(appointments)
+console.log('TYPEOF:', typeof(appointmentsTest))
+
+// ----------------------------------------------------------------
+
 export default function Application(props) {
   console.log('props:', props)
   const [day, setDay] = useState('Monday')
-  console.log('Object.values(appointments):', Object.values(appointments).map())
+  console.log('Object.values(appointments).map():', Object.values(appointments))
+  console.log('APPOINTMENT:', Appointment)
+  const appointmentsTest = Object.values(appointments)
+  console.log(typeof(appointmentsTest))
+  // const appointmentsMapped = appointmentsTest.map()
+  // console.log('appointmentsMapped:', appointmentsMapped)
+  const entries = Object.entries(appointments)
+  console.log('ENTRIES:', entries)
+  // const mappedEntries = entries.map();
+  // console.log('mappedEntries:', mappedEntries);
   // console.log('Object.values(appointments).map():', Object.values(appointments).map())
   // const appointmentList = Object.values(appointments).map()
 
@@ -97,11 +112,14 @@ export default function Application(props) {
           alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule" appointments={Object.values(appointments).map()}>
-        <Appointment
-          key={appointment.id} 
-          {...appointment} 
-        />
+      <section className="schedule">
+      {Object.values(appointments).map((value, index) => {
+        return (
+          <Appointment key={index}>
+            <h2>{value}</h2>
+          </Appointment>
+        );
+      })} 
       </section>
     </main>
   );
@@ -109,4 +127,4 @@ export default function Application(props) {
 
 // DEV NOTES
 // getting this error: https://github.com/facebook/create-react-app/issues/11773
-// 
+// https://bobbyhadz.com/blog/react-map-object
