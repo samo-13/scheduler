@@ -113,13 +113,14 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-      {Object.values(appointments).map((value, index) => {
+      {Object.values(appointments).map((appointment, index) => {
         return (
-          <Appointment key={index}>
-            <h2>{value}</h2>
+          <Appointment key={appointment.id} {...appointment}>
           </Appointment>
+          
         );
-      })} 
+      })}
+      <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
