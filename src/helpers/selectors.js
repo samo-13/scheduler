@@ -37,7 +37,7 @@
 //   }
 // };
 
-export function getAppointmentsForDay(state, day) {
+export default function getAppointmentsForDay(state, day) {
   // console.log('this.state:', this.state)
   // console.log('day:', state.days)
   for (const d of state.days) {
@@ -49,8 +49,8 @@ export function getAppointmentsForDay(state, day) {
       // console.log('appointments:', state.appointments)
       const appointmentsArray = d.appointments;
       // console.log('appointmentsArray:', appointmentsArray);
-      const results = appointmentsArray.map((a ) => getAppointmentArray(a, state));
-      // console.log('results:', results.flat())
+      const results = appointmentsArray.map((a) => getAppointmentArray(a, state));
+      console.log('results:', results.flat())
       return results.flat();
       // return appointmentsArray;
     }

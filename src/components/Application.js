@@ -6,48 +6,48 @@ import DayList from "components/DayList.js"
 import "components/Appointment"
 import Appointment from "components/Appointment/index.js"
 import axios from 'axios';
-// import getAppointmentsForDay from "helpers/selectors.js"
+import getAppointmentsForDay from "helpers/selectors.js"
 
 // ----------------------------------------------------------------
 
-const appointments = {
-  "1": {
-    id: 1,
-    time: "12pm",
-  },
-  "2": {
-    id: 2,
-    time: "1pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer:{
-        id: 3,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  },
-  "3": {
-    id: 3,
-    time: "2pm",
-  },
-  "4": {
-    id: 4,
-    time: "3pm",
-    interview: {
-      student: "Archie Andrews",
-      interviewer:{
-        id: 4,
-        name: "Cohana Roy",
-        avatar: "https://i.imgur.com/FK8V841.jpg",
-      }
-    }
-  },
-  "5": {
-    id: 5,
-    time: "4pm",
-  }
-};
+// const appointments = {
+//   "1": {
+//     id: 1,
+//     time: "12pm",
+//   },
+//   "2": {
+//     id: 2,
+//     time: "1pm",
+//     interview: {
+//       student: "Lydia Miller-Jones",
+//       interviewer:{
+//         id: 3,
+//         name: "Sylvia Palmer",
+//         avatar: "https://i.imgur.com/LpaY82x.png",
+//       }
+//     }
+//   },
+//   "3": {
+//     id: 3,
+//     time: "2pm",
+//   },
+//   "4": {
+//     id: 4,
+//     time: "3pm",
+//     interview: {
+//       student: "Archie Andrews",
+//       interviewer:{
+//         id: 4,
+//         name: "Cohana Roy",
+//         avatar: "https://i.imgur.com/FK8V841.jpg",
+//       }
+//     }
+//   },
+//   "5": {
+//     id: 5,
+//     time: "4pm",
+//   }
+// };
 
 // ----------------------------------------------------------------
 
@@ -70,14 +70,11 @@ const appointments = {
 // ];
 
 // ----------------------------------------------------------------
-
 // const appointmentsTest = Object.values(appointments)
 // console.log('TYPEOF:', typeof(appointmentsTest))
 // getAppointmentsForDay();
 // console.log('state', state)
 // ----------------------------------------------------------------
-
-
 
 export default function Application(props) {
   const [state, setState] = useState({
@@ -87,10 +84,11 @@ export default function Application(props) {
   });
 
   const setDay = day => setState({ ...state, day });
-  const setDays = (days) => {
-    setState(prev => ({ ...prev, days }));
-  };
-  
+  // const setDays = (days) => {
+  //   setState(prev => ({ ...prev, days }));
+  // };
+
+  // console.log('day:', day)
   // console.log('props:', props)
   // console.log('Object.values(appointments).map():', Object.values(appointments))
   // console.log('APPOINTMENT:', Appointment)
@@ -106,14 +104,22 @@ export default function Application(props) {
   // const appointmentList = Object.values(appointments).map()
 
   useEffect(() => {
-    axios.get("http://localhost:8001/api/days").then((days) => {
-      // console.log('DAYS.DATA:', days.data)
-      setDays(days.data)
+    Promise.all([
+      axios.get('http://localhost:8001/api/days'),
+      axios.get('http://localhost:8001/api/appointments'),
+      // axios.get('http://localhost:8001/api/interviewers')
+    ]).then((all) => {
+      console.log(all[1].data)
+      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data }));
+      // console.log(all[2].data); // third
     })
   }, [])
+
+  const dailyAppointments = getAppointmentsForDay(state, state.day)
 // console.log('days:', days)
 // console.log('this.state:', this.state)
 // getAppointmentsForDay(days, 'Tuesday');
+console.log('state.day:', state.day)
   return (
     <main className="layout">
       <section className="sidebar">
@@ -138,7 +144,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-      {Object.values(appointments).map((appointment) => {
+      {dailyAppointments.map(appointment => {
         return (
           <Appointment key={appointment.id} {...appointment}>
           </Appointment>
