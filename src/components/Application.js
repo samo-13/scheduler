@@ -1,10 +1,11 @@
 // This creates an object named React which contains methods necessary to use the React library
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "components/Application.scss";
 import DayList from "components/DayList.js"
 // import { statement_timeout } from 'pg/lib/defaults';
 import "components/Appointment"
 import Appointment from "components/Appointment/index.js"
+import axios from 'axios';
 
 // ----------------------------------------------------------------
 
@@ -49,23 +50,23 @@ const appointments = {
 
 // ----------------------------------------------------------------
 
-const days = [
-  {
-    id: 1,
-    name: "Monday",
-    spots: 2,
-  },
-  {
-    id: 2,
-    name: "Tuesday",
-    spots: 5,
-  },
-  {
-    id: 3,
-    name: "Wednesday",
-    spots: 0,
-  },
-];
+// const days = [
+//   {
+//     id: 1,
+//     name: "Monday",
+//     spots: 2,
+//   },
+//   {
+//     id: 2,
+//     name: "Tuesday",
+//     spots: 5,
+//   },
+//   {
+//     id: 3,
+//     name: "Wednesday",
+//     spots: 0,
+//   },
+// ];
 
 // ----------------------------------------------------------------
 
@@ -90,6 +91,15 @@ export default function Application(props) {
   // console.log('Object.values(appointments).map():', Object.values(appointments).map())
   // const appointmentList = Object.values(appointments).map()
 
+  const [days, setDays] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8001/api/days").then((days) => {
+      console.log('DAYS.DATA:', days.data)
+      setDays(days.data)
+    })
+  }, [])
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -100,6 +110,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
+        
         <DayList
           days={days}
           day={day}
@@ -117,7 +128,6 @@ export default function Application(props) {
         return (
           <Appointment key={appointment.id} {...appointment}>
           </Appointment>
-          
         );
       })}
       <Appointment key="last" time="5pm" />
