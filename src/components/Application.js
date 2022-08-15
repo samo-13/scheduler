@@ -71,8 +71,8 @@ const appointments = {
 
 // ----------------------------------------------------------------
 
-const appointmentsTest = Object.values(appointments)
-console.log('TYPEOF:', typeof(appointmentsTest))
+// const appointmentsTest = Object.values(appointments)
+// console.log('TYPEOF:', typeof(appointmentsTest))
 // getAppointmentsForDay();
 // console.log('state', state)
 // ----------------------------------------------------------------
@@ -80,31 +80,38 @@ console.log('TYPEOF:', typeof(appointmentsTest))
 
 
 export default function Application(props) {
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: {}
+  });
+
+  const setDay = day => setState({ ...state, day });
+  const setDays = (days) => {
+    setState(prev => ({ ...prev, days }));
+  };
   
-  console.log('props:', props)
-  const [day, setDay] = useState('Monday')
-  console.log('Object.values(appointments).map():', Object.values(appointments))
-  console.log('APPOINTMENT:', Appointment)
-  const appointmentsTest = Object.values(appointments)
-  console.log(typeof(appointmentsTest))
+  // console.log('props:', props)
+  // console.log('Object.values(appointments).map():', Object.values(appointments))
+  // console.log('APPOINTMENT:', Appointment)
+  // const appointmentsTest = Object.values(appointments)
+  // console.log(typeof(appointmentsTest))
   // const appointmentsMapped = appointmentsTest.map()
   // console.log('appointmentsMapped:', appointmentsMapped)
-  const entries = Object.entries(appointments)
-  console.log('ENTRIES:', entries)
+  // const entries = Object.entries(appointments)
+  // console.log('ENTRIES:', entries)
   // const mappedEntries = entries.map();
   // console.log('mappedEntries:', mappedEntries);
   // console.log('Object.values(appointments).map():', Object.values(appointments).map())
   // const appointmentList = Object.values(appointments).map()
 
-  const [days, setDays] = useState([]);
-
   useEffect(() => {
     axios.get("http://localhost:8001/api/days").then((days) => {
-      console.log('DAYS.DATA:', days.data)
+      // console.log('DAYS.DATA:', days.data)
       setDays(days.data)
     })
   }, [])
-console.log('days:', days)
+// console.log('days:', days)
 // console.log('this.state:', this.state)
 // getAppointmentsForDay(days, 'Tuesday');
   return (
@@ -119,8 +126,8 @@ console.log('days:', days)
         <nav className="sidebar__menu">
         
         <DayList
-          days={days}
-          day={day}
+          days={state.days}
+          day={state.day}
           setDay={setDay}
         />
         </nav>
