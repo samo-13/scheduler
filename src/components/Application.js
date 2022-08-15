@@ -88,6 +88,8 @@ export default function Application(props) {
   //   setState(prev => ({ ...prev, days }));
   // };
 
+  // console.log('state.interviewers:', state.interviewers)
+
   // console.log('day:', day)
   // console.log('props:', props)
   // console.log('Object.values(appointments).map():', Object.values(appointments))
@@ -107,19 +109,36 @@ export default function Application(props) {
     Promise.all([
       axios.get('http://localhost:8001/api/days'),
       axios.get('http://localhost:8001/api/appointments'),
-      // axios.get('http://localhost:8001/api/interviewers')
+      axios.get('http://localhost:8001/api/interviewers')
     ]).then((all) => {
       console.log(all[1].data)
-      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data }));
-      // console.log(all[2].data); // third
+      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
+      console.log('TEST:', all[2].data); // third
     })
   }, [])
 
-  const dailyAppointments = getAppointmentsForDay(state, state.day)
+  // const dailyAppointments = getAppointmentsForDay(state, state.day)
 // console.log('days:', days)
 // console.log('this.state:', this.state)
 // getAppointmentsForDay(days, 'Tuesday');
-console.log('state.day:', state.day)
+// console.log('state.day:', state.day)
+// console.log('state.interviewers:', state.interviewers)
+
+const appointments = getAppointmentsForDay(state, state.day);
+
+const schedule = appointments.map((appointment) => {
+  // const interview = getInterview(state, appointment.interview);
+
+  return (
+    <Appointment
+      key={appointment.id}
+      id={appointment.id}
+      time={appointment.time}
+      interview={interview}
+    />
+  );
+});
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -144,12 +163,7 @@ console.log('state.day:', state.day)
         />
       </section>
       <section className="schedule">
-      {dailyAppointments.map(appointment => {
-        return (
-          <Appointment key={appointment.id} {...appointment}>
-          </Appointment>
-        );
-      })}
+      {schedule}
       <Appointment key="last" time="5pm" />
       </section>
     </main>
