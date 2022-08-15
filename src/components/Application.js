@@ -6,6 +6,7 @@ import DayList from "components/DayList.js"
 import "components/Appointment"
 import Appointment from "components/Appointment/index.js"
 import axios from 'axios';
+// import getAppointmentsForDay from "helpers/selectors.js"
 
 // ----------------------------------------------------------------
 
@@ -72,10 +73,14 @@ const appointments = {
 
 const appointmentsTest = Object.values(appointments)
 console.log('TYPEOF:', typeof(appointmentsTest))
-
+// getAppointmentsForDay();
+// console.log('state', state)
 // ----------------------------------------------------------------
 
+
+
 export default function Application(props) {
+  
   console.log('props:', props)
   const [day, setDay] = useState('Monday')
   console.log('Object.values(appointments).map():', Object.values(appointments))
@@ -99,7 +104,9 @@ export default function Application(props) {
       setDays(days.data)
     })
   }, [])
-
+console.log('days:', days)
+// console.log('this.state:', this.state)
+// getAppointmentsForDay(days, 'Tuesday');
   return (
     <main className="layout">
       <section className="sidebar">
