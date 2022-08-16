@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 
 // We will need to track the current mode as a stateful variable that will be used to render the Appointment child components conditionally. As we interact with the application, we will use two different functions to change between the modes:
 
@@ -9,26 +10,25 @@
 export default function useVisualMode(initial) { // take in an initial mode
 
   const [mode, setMode] = useState(initial); // set the mode state with the initial mode provided
-  const [previousMode, setPreviousMode] = useState([initial])
 
   // Create a transition function within useVisualMode that will take in a new mode and update the mode state with the new value. 
   // If we used useState to initialize the mode state in useVisualMode, what will we have to do to update the mode value?
   // This custom Hook will need to add the transition property to the object that useVisualMode returns. 
   // The property will point to a function that we implement directly in the custom Hook.
 
-  function transition(mode, replace = false) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
-    if (replace === false) {
-      console.log('Replace is false!')
-      console.log('mode false:', mode)
-    } else {
-      console.log('mode else:', mode)
-    }
-  }
+  // function transition(mode, replace = false) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
+  //   if (replace === false) {
+  //     console.log('Replace is false!')
+  //     console.log('mode false:', mode)
+  //   } else {
+  //     console.log('mode else:', mode)
+  //   }
+  // }
 
-  function back() {
-    console.log('hi')
-  }
+  // function back() {
+  //   console.log('hi')
+  // }
 
-  return { mode, transition, back }; // return an object with a mode property
+  return { mode }; // return an object with a mode property
 };
 
