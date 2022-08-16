@@ -10,25 +10,38 @@ import React, { useState } from 'react';
 export default function useVisualMode(initial) { // take in an initial mode
 
   const [mode, setMode] = useState(initial); // set the mode state with the initial mode provided
+  const [history, setHistory] = useState([initial]); // initializing our history as an array with the first mode that gets passed to useVisualMode
 
   // Create a transition function within useVisualMode that will take in a new mode and update the mode state with the new value. 
   // If we used useState to initialize the mode state in useVisualMode, what will we have to do to update the mode value?
   // This custom Hook will need to add the transition property to the object that useVisualMode returns. 
   // The property will point to a function that we implement directly in the custom Hook.
 
-  // function transition(mode, replace = false) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
-  //   if (replace === false) {
-  //     console.log('Replace is false!')
-  //     console.log('mode false:', mode)
-  //   } else {
-  //     console.log('mode else:', mode)
-  //   }
-  // }
-
-  // function back() {
-  //   console.log('hi')
-  // }
-
-  return { mode }; // return an object with a mode property
+  const lastIndex = (history.length - 1)
+  console.log('lastIndex:', lastIndex);
+  console.log('history:', history)
+  console.log('mode:', mode)
+  
+  // When transition is called, we need to add the new mode to our history
+  // Add the new mode to our history array using spread
+  function transition(mode, replace = false) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
+    if (replace === true) { // When replace is true then set the history to reflect that we are replacing the current mode.
+      setHistory([...history.slice(0, lastIndex), mode])
+      console.log('setHistory:', setHistory)  
+    } else {
+      setHistory([...history, mode])
+    }
+  }
+  // When back is called, we should set the mode to the previous item in our history array.
+  function back() {
+    if (history.length > 1) {
+      const newHistory = [...history.slice(0, lastIndex)]
+      console.log('newHistory:', newHistory)
+      setHistory(newHistory)
+    }
+  }
+  
+  return { mode:history[lastIndex], transition, back }; // return an object with a mode property
 };
+
 
