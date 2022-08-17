@@ -48,32 +48,53 @@ const state = {
 // Our function needs to:
 
 // -- Find the object state.days array who's name matches the provided day.
+
 // -- Access that specific days appointment array.
+
 // -- Iiterate through it, comparing where it's id matches the id of states.appointments and return that value.
+
 // -- Do validation.
 
 const getAppointmentsForDay = function(state, day) {
   // console.log('this.state:', this.state)
-  console.log('state.days.length:', state.days.length);
-  console.log('state.days:', state.days);
-  console.log('state:', state);
-  console.log('day:', day);
-  console.log('state.days.name:', state.days[0].name)
+  // console.log('state.days.length:', state.days.length);
+  // console.log('state.days:', state.days);
+  // console.log('state:', state);
+  // console.log('day:', day);
+  // console.log('state.days.name:', state.days[0].name)
+  // const daysAppointmentArray = [];
 
-  for (let i = 0; i < state.days.length; i ++) {
-    if (state.days[i].name === day) {
-
-      console.log (`Found! ${day}`);
-      console.log(`Appointments: ${state.days[i].appointments}`)
-    }
-    // console.log('state.days.name:', state.days[i].name)
-    // return state.days[i].name
-  }
-
-  if (state.days.length === 0) { // If there are no appointments on the given day, our days data will be empty -- return an empty array.
+  if (state.days.length < 1) {
     return [];
   }
-  return 'hi!'
+
+  for (let i = 0; i < state.days.length; i ++) {
+    console.log('-----------------------------------')
+    const storedDay = state.days[i].name
+
+    if (storedDay === day) { 
+        console.log (`Found! ${day}`)
+        console.log(`Appointments: ${state.days[i].appointments}`)
+        const daysAppointments = state.days[i].appointments
+        const numOfAppointments = daysAppointments.length
+        console.log('Number of appointments:', numOfAppointments);
+        // daysAppointmentArray.push(daysAppointments)
+        console.log(typeof(daysAppointments))
+        console.log(`${day}'s appointments: ${daysAppointments}`)
+        // console.log(typeof(daysAppointmentArray))
+        // return daysAppointments
+        console.log('-----------------------------------')
+    }
+
+    if (storedDay !== day) {
+          console.log(`${day} not found - returning empty array`)
+          return [];
+        }
+    // console.log('state.days.name:', state.days[i].name)
+    // return state.days[i].name
+ }
+return [];
+   // If there are no appointments on the given day, our days data will be empty -- return an empty array.
 }
 
 getAppointmentsForDay(state, "Monday")
