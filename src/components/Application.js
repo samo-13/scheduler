@@ -134,7 +134,7 @@ const schedule = appointments.map((appointment) => {
       key={appointment.id}
       id={appointment.id}
       time={appointment.time}
-      interview={interview}
+      interview={appointment.interview}
     />
   );
 });

@@ -34,12 +34,10 @@ export default function useVisualMode(initial) { // take in an initial mode
   }
   // When back is called, we should set the mode to the previous item in our history array.
   function back() {
-    if (history.length > 1) {
       const newHistory = [...history.slice(0, lastIndex)]
       console.log('newHistory:', newHistory)
       setHistory(newHistory)
     }
-  }
   
   return { mode:history[lastIndex], transition, back }; // return an object with a mode property
 };

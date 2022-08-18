@@ -63,37 +63,68 @@ const getAppointmentsForDay = function(state, day) {
   // console.log('day:', day);
   // console.log('state.days.name:', state.days[0].name)
   // const daysAppointmentArray = [];
+  console.log('STATE.DAYS:', state.days)
+  const stateObj = state.days
 
-  if (state.days.length < 1) {
-    return [];
+  if (stateObj < 1) {
+    console.log(`${day} --- returning empty array`)
+    return []
   }
 
-  for (let i = 0; i < state.days.length; i ++) {
-    console.log('-----------------------------------')
-    const storedDay = state.days[i].name
+  const dayObj = stateObj.filter(e => e.name === day);
+  if (dayObj.length > 0) {
 
-    if (storedDay === day) { 
-        console.log (`Found! ${day}`)
-        console.log(`Appointments: ${state.days[i].appointments}`)
-        const daysAppointments = state.days[i].appointments
-        const numOfAppointments = daysAppointments.length
-        console.log('Number of appointments:', numOfAppointments);
-        // daysAppointmentArray.push(daysAppointments)
-        console.log(typeof(daysAppointments))
-        console.log(`${day}'s appointments: ${daysAppointments}`)
-        // console.log(typeof(daysAppointmentArray))
-        // return daysAppointments
-        console.log('-----------------------------------')
-    }
+    const foundDayObj = dayObj[0]
+    const dayAppointments = foundDayObj.appointments;
+    console.log('FOUND FOUND!!:', foundDayObj);
+    console.log('dayAppointments:', dayAppointments)
+  }  
+ 
+  // state.days.forEach(stateDay => {
+  //   console.log('-----------------------------------')
+  //     if (stateDay.name === day) {
+  //       console.log('FOUND:', stateDay.name)
+  //         console.log('stateDay:', stateDay);
+  //         const dayAppointments = stateDay.appoontments
+  //         console.log('dayAppointments:', dayAppointments)
+  //         return dayAppointments
+  //     }
+  // });
 
-    if (storedDay !== day) {
-          console.log(`${day} not found - returning empty array`)
-          return [];
-        }
-    // console.log('state.days.name:', state.days[i].name)
-    // return state.days[i].name
- }
-return [];
+  // for (let actualDay of state.days) {
+  //   console.log('state.days', state.days)
+  //   console.log('actualDay:', actualDay)
+  //   if (actualDay.name === day) {
+  //     console.log('actualDay 2:', actualDay)
+  //     console.log('day:', day)
+  //   }
+  //   else { 
+  //     console.log(`${day} not found!`)
+  //   }
+  // }
+
+//   for (let i = 0; i < state.days.length; i ++) {
+//     console.log('-----------------------------------')
+//     const storedDay = state.days[i].name
+
+//     if (storedDay === day) { 
+//         console.log (`Found! ${day}`)
+//         console.log(`Appointments: ${state.days[i].appointments}`)
+//         const daysAppointments = state.days[i].appointments
+//         const numOfAppointments = daysAppointments.length
+//         console.log('Number of appointments:', numOfAppointments);
+//         // daysAppointmentArray.push(daysAppointments)
+//         console.log(typeof(daysAppointments))
+//         console.log(`${day}'s appointments: ${daysAppointments}`)
+//         // console.log(typeof(daysAppointmentArray))
+//         // return daysAppointments
+//         console.log('-----------------------------------')
+//     }
+//     // console.log('state.days.name:', state.days[i].name)
+//     // return state.days[i].name
+//  }
+ console.log(`${day} not found - returning empty array`)
+ return [];
    // If there are no appointments on the given day, our days data will be empty -- return an empty array.
 }
 
