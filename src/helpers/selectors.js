@@ -1,5 +1,5 @@
 
-// -----------------------------------------------------------------------------------------------
+// // -----------------------------------------------------------------------------------------------
 
 const state = {
   days: [
@@ -64,21 +64,31 @@ const getAppointmentsForDay = function(state, day) {
   // console.log('state.days.name:', state.days[0].name)
   // const daysAppointmentArray = [];
   console.log('STATE.DAYS:', state.days)
+  console.log('STATE.DAYS.LENGTH:', state.days.length)
+  const numOfDays = state.days.length
   const stateObj = state.days
 
-  if (stateObj < 1) {
+
+
+  if (numOfDays < 1) {
     console.log(`${day} --- returning empty array`)
     return []
   }
 
-  const dayObj = stateObj.filter(e => e.name === day);
-  if (dayObj.length > 0) {
+    const dayObj = stateObj.filter(e => e.name === day);
+    if (dayObj.length > 0) {
 
-    const foundDayObj = dayObj[0]
-    const dayAppointments = foundDayObj.appointments;
-    console.log('FOUND FOUND!!:', foundDayObj);
-    console.log('dayAppointments:', dayAppointments)
-  }  
+      const foundDayObj = dayObj[0]
+      const dayAppointments = foundDayObj.appointments;
+      console.log('FOUND FOUND!!:', foundDayObj);
+      console.log('dayAppointments:', dayAppointments)
+      
+      if (dayAppointments.length < 1) {
+        console.log(`${day} not found ------ returning empty array`)
+        return []
+      }
+      return dayAppointments;
+    }
  
   // state.days.forEach(stateDay => {
   //   console.log('-----------------------------------')
@@ -123,7 +133,7 @@ const getAppointmentsForDay = function(state, day) {
 //     // console.log('state.days.name:', state.days[i].name)
 //     // return state.days[i].name
 //  }
- console.log(`${day} not found - returning empty array`)
+  console.log(`${day} not found 2 ------ returning empty array`)
  return [];
    // If there are no appointments on the given day, our days data will be empty -- return an empty array.
 }
