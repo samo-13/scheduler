@@ -57,9 +57,12 @@ const state = {
 
 const getAppointmentsForDay = function(state, day) {
   let result;
+  // let dayAppointmentsArray = [];
 
-  if (state.days === []) {
+  if (state.days.length < 1) {
     result = []
+    console.log('RESULT 1:', result)
+    return result;
   };
 
 //   // console.log('this.state:', this.state)
@@ -71,24 +74,39 @@ const getAppointmentsForDay = function(state, day) {
 //   // const daysAppointmentArray = [];
 //   console.log('STATE.DAYS:', state.days)
 //   console.log('STATE.DAYS.LENGTH:', state.days.length)
-  const numOfDays = state.days.length
-  const stateObj = state.days
+  // const numOfDays = state.days.length
+  // const stateObj = state.days
 
-  const hasDay = stateObj.some(function(day) {
-    return day.name === day;
-  })
+  // const hasDay = stateObj.some(function(day) {
+  //   return day.name === day;
+  // })
   
-  console.log('hasDay:', hasDay);
-  console.log('numOfDays:', numOfDays)
+  // console.log('hasDay:', hasDay);
+  // console.log('numOfDays:', numOfDays)
 
-  function checkDayExists(day) {
-    return stateObj.some(function(element) {
-      return element.name === day
-    });
-  }
+  // if (checkDayExists(day) === false) {
+  //   return [];
+  // }
 
-  console.log('checkDayExists 1:', checkDayExists('Monday'));
-  console.log('checkDayExists 2:', checkDayExists('Wednesday'));
+  // if (checkDayExists(day) === true) {
+  //   dayAppointmentsArray = state.days.appointments
+  //   console.log('dayAppointmentsArray:', dayAppointmentsArray);
+  //   state.days.forEach(day => {
+  //     console.log('-----------------------------------')
+  //     console.log('state.days:', state.days.name)
+  //     console.log('state.days.name:', state.days.name)
+  //       if (stateDay.name === day) {
+  //         console.log('FOUND:', stateDay.name)
+  //           console.log('stateDay:', stateDay);
+  //           const dayAppointments = stateDay.appointments
+  //           console.log('dayAppointments:', dayAppointments)
+  //           return dayAppointments
+  //       }
+  //   });
+  // }
+
+  // console.log('checkDayExists 1:', checkDayExists('Monday'));
+  // console.log('checkDayExists 2:', checkDayExists('Wednesday'));
 
 //   if (numOfDays < 1) {
 //     console.log(`${day} --- returning empty array`)
@@ -121,16 +139,7 @@ const getAppointmentsForDay = function(state, day) {
     //   console.log('CHECK.KEY:', keyExist);
     // };
     
-  // state.days.forEach(stateDay => {
-  //   console.log('-----------------------------------')
-  //     if (stateDay.name === day) {
-  //       console.log('FOUND:', stateDay.name)
-  //         console.log('stateDay:', stateDay);
-  //         const dayAppointments = stateDay.appoontments
-  //         console.log('dayAppointments:', dayAppointments)
-  //         return dayAppointments
-  //     }
-  // });
+
 
   // for (let actualDay of state.days) {
   //   console.log('state.days', state.days)
@@ -167,9 +176,64 @@ const getAppointmentsForDay = function(state, day) {
 //   console.log(`${day} not found 2 ------ returning empty array`)
 //  return [];
    // If there are no appointments on the given day, our days data will be empty -- return an empty array.
-   console.log('RESULT:', result)
-   return result;
+   console.log('-----------------')
+
+  //  const dayName = state.days.name
+   const daysArray = state.days;
+   console.log('daysArray:', daysArray)
+   
+   const findDayIndex = daysArray.findIndex(function(stateDay, index) {
+     if (stateDay.name === day)
+       return true; // success = index of element || failure = -1
+   });
+
+   if (findDayIndex === -1) {
+    console.log('Day not found')
+    return [];
+   }
+
+   if (findDayIndex > -1) {
+    console.log('daysArray[findDayIndex].name:', daysArray[findDayIndex].name)
+    console.log('daysArray[findDayIndex].appointments:', daysArray[findDayIndex].appointments)
+    const daysAppointments = daysArray[findDayIndex].appointments;
+    console.log('-----------------')
+    console.log('daysAppointments:', daysAppointments)
+    return daysAppointments
+   }
+   
+  //  console.log('found index:', findDayIndex)
+
+  //  console.log('RESULT:', result)
+  // checkDayExists(day)
+  return result;
 };
+
+// const checkDayExists = function(day) {
+//   const stateObj = state.days
+  
+//   return stateObj.some(function(element) {
+//     let dayExists = (element.name === day)
+//     console.log('ELEMENT:', element.name)
+//     console.log('ELEMENT 1:', element.appointments)
+
+//     if (dayExists === true) {
+//       let dayAppointmentsArray = element.appointments
+//       // console.log('RESULT:', dayAppointmentsArray)
+//       result = dayAppointmentsArray
+//       console.log('RESULT 2:', result)
+//       return result;
+//     }
+
+//     if (!dayExists) {
+//       // console.log('EMPTY ARRAY!')
+//       result = [];
+//       console.log('RESULT 3:', result)
+//       return result;
+//     }
+//   });
+// }
+
+
 
 // getAppointmentsForDay(state, "Monday")
 // getAppointmentsForDay(state, "Tuesday")
@@ -177,6 +241,7 @@ const getAppointmentsForDay = function(state, day) {
 
 getAppointmentsForDay(state, "Monday")
 getAppointmentsForDay(state, "Tuesday")
+getAppointmentsForDay(state, "Wednesday")
 
 // const getAppointmentArray = function(id, state) {
 //   const appointmentResults = [];
