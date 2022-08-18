@@ -2,11 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import "components/Application.scss";
 import DayList from "components/DayList.js"
-// import { statement_timeout } from 'pg/lib/defaults';
+import { statement_timeout } from 'pg/lib/defaults';
 import "components/Appointment"
 import Appointment from "components/Appointment/index.js"
 import axios from 'axios';
 import getAppointmentsForDay from "helpers/selectors.js"
+import getInterview from "helpers/selectors.js"
 
 // ----------------------------------------------------------------
 
@@ -113,11 +114,13 @@ export default function Application(props) {
     ]).then((all) => {
       console.log(all[1].data)
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
+      console.log('ALL:', all)
       console.log('TEST:', all[2].data); // third
     })
   }, [])
 
-  // const dailyAppointments = getAppointmentsForDay(state, state.day)
+  // setDays(days)
+// const dailyAppointments = getAppointmentsForDay(state, state.day)
 // console.log('days:', days)
 // console.log('this.state:', this.state)
 // getAppointmentsForDay(days, 'Tuesday');
@@ -127,14 +130,14 @@ export default function Application(props) {
 const appointments = getAppointmentsForDay(state, state.day);
 
 const schedule = appointments.map((appointment) => {
-  // const interview = getInterview(state, appointment.interview);
+  const interview = getInterview(state, appointment.interview);
 
   return (
     <Appointment
       key={appointment.id}
       id={appointment.id}
       time={appointment.time}
-      interview={appointment.interview}
+      interview={interview}
     />
   );
 });

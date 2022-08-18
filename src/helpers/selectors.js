@@ -1,47 +1,47 @@
 
-// // // -----------------------------------------------------------------------------------------------
+// // // // -----------------------------------------------------------------------------------------------
 
-const state = {
-  days: [
-    {
-      id: 1,
-      name: "Monday",
-      appointments: [1, 2, 3]
-    },
-    {
-      id: 2,
-      name: "Tuesday",
-      appointments: [4, 5]
-    }
-  ],
-  appointments: {
-    "1": { id: 1, time: "12pm", interview: null },
-    "2": { id: 2, time: "1pm", interview: null },
-    "3": {
-      id: 3,
-      time: "2pm",
-      interview: { student: "Archie Cohen", interviewer: 2 }
-    },
-    "4": { id: 4, time: "3pm", interview: null },
-    "5": {
-      id: 5,
-      time: "4pm",
-      interview: { student: "Chad Takahashi", interviewer: 2 }
-    }
-  },
-  interviewers: {
-    "1": {  
-      "id": 1,
-      "name": "Sylvia Palmer",
-      "avatar": "https://i.imgur.com/LpaY82x.png"
-    },
-    "2": {
-      id: 2,
-      name: "Tori Malcolm",
-      avatar: "https://i.imgur.com/Nmx0Qxo.png"
-    }
-  }
-};
+// const state = {
+//   days: [
+//     {
+//       id: 1,
+//       name: "Monday",
+//       appointments: [1, 2, 3]
+//     },
+//     {
+//       id: 2,
+//       name: "Tuesday",
+//       appointments: [4, 5]
+//     }
+//   ],
+//   appointments: {
+//     "1": { id: 1, time: "12pm", interview: null },
+//     "2": { id: 2, time: "1pm", interview: null },
+//     "3": {
+//       id: 3,
+//       time: "2pm",
+//       interview: { student: "Archie Cohen", interviewer: 2 }
+//     },
+//     "4": { id: 4, time: "3pm", interview: null },
+//     "5": {
+//       id: 5,
+//       time: "4pm",
+//       interview: { student: "Chad Takahashi", interviewer: 2 }
+//     }
+//   },
+//   interviewers: {
+//     "1": {  
+//       "id": 1,
+//       "name": "Sylvia Palmer",
+//       "avatar": "https://i.imgur.com/LpaY82x.png"
+//     },
+//     "2": {
+//       id: 2,
+//       name: "Tori Malcolm",
+//       avatar: "https://i.imgur.com/Nmx0Qxo.png"
+//     }
+//   }
+// };
 
 // // -----------------------------------------------------------------------------------------------
 
@@ -55,40 +55,45 @@ const state = {
 
 // // -- Do validation.
 
-// export default function getAppointmentsForDay(state, day) {
-//   let result;
-//   // let dayAppointmentsArray = [];
+export default function getAppointmentsForDay(state, day) {
+  
+  // let dayAppointmentsArray = [];
 
-//   if (state.days.length < 1) {
-//     result = []
-//     return result;
-//   };
+  // if (state.days.length < 1) {
+  //   result = []
+  //   return result;
+  // };
 
-//   // console.log('state.days:', state.days);
-//   //  // If there are no appointments on the given day, our days data will be empty -- return an empty array.
-//   // console.log('-----------------')
+  // console.log('state.days:', state.days);
+  //  // If there are no appointments on the given day, our days data will be empty -- return an empty array.
+  // console.log('-----------------')
 
-//   //  const dayName = state.days.name
-//    const daysArray = state.days;
-//   //  console.log('daysArray:', daysArray)
+  //  const dayName = state.days.name
+  const daysArray = state.days;
+  //  console.log('daysArray:', daysArray)
+  console.log('DAY:', day)
+  const findDayIndex = daysArray.map(daysObject => daysObject.name).indexOf(day)
+  console.log('findDayIndex:', findDayIndex)
+    
+  //   if (stateDay.name === day)
+  //   return true; // success = index of element || failure = -1
+  //  });
+
+  
+   if (findDayIndex === -1) {
+    console.log(`${day} not found!`)
+    return [];
+   }
+
+   if (findDayIndex > -1) {
+    const daysAppointments = daysArray[findDayIndex].appointments;
+    console.log(`${day}: ${daysAppointments}`)
+    return daysAppointments
+   }
    
-//    const findDayIndex = daysArray.findIndex(function(stateDay, index) {
-//      if (stateDay.name === day)
-//        return true; // success = index of element || failure = -1
-//    });
+  return [];
+};
 
-//    if (findDayIndex === -1) {
-//     console.log('Day not found')
-//     return [];
-//    }
-
-//    if (findDayIndex > -1) {
-//     const daysAppointments = daysArray[findDayIndex].appointments;
-//     return daysAppointments
-//    }
-   
-//   return result;
-// };
 
 // getAppointmentsForDay(state, "Monday")
 // getAppointmentsForDay(state, "Tuesday")
@@ -124,7 +129,7 @@ const state = {
 //   }
 // }
 
-function getInterview(state, interview){
+export function getInterview(state, interview){
     console.log('interview:', interview)
     console.log('state.appointments[interview].interview:', state.appointments[interview].interview)
     console.log('state:', state)
@@ -145,6 +150,6 @@ function getInterview(state, interview){
   return null;
 }
 
-getInterview(state,"2")
-getInterview(state,"3")
-getInterview(state,"4")
+// getInterview(state,"2")
+// getInterview(state,"3")
+// getInterview(state,"4")
