@@ -1,5 +1,5 @@
 
-// // -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------
 
 const state = {
   days: [
@@ -56,40 +56,71 @@ const state = {
 // -- Do validation.
 
 const getAppointmentsForDay = function(state, day) {
-  // console.log('this.state:', this.state)
-  // console.log('state.days.length:', state.days.length);
-  // console.log('state.days:', state.days);
-  // console.log('state:', state);
-  // console.log('day:', day);
-  // console.log('state.days.name:', state.days[0].name)
-  // const daysAppointmentArray = [];
-  console.log('STATE.DAYS:', state.days)
-  console.log('STATE.DAYS.LENGTH:', state.days.length)
+  let result;
+
+  if (state.days === []) {
+    result = []
+  };
+
+//   // console.log('this.state:', this.state)
+//   // console.log('state.days.length:', state.days.length);
+  console.log('state.days:', state.days);
+//   // console.log('state:', state);
+//   // console.log('day:', day);
+//   // console.log('state.days.name:', state.days[0].name)
+//   // const daysAppointmentArray = [];
+//   console.log('STATE.DAYS:', state.days)
+//   console.log('STATE.DAYS.LENGTH:', state.days.length)
   const numOfDays = state.days.length
   const stateObj = state.days
 
+  const hasDay = stateObj.some(function(day) {
+    return day.name === day;
+  })
+  
+  console.log('hasDay:', hasDay);
+  console.log('numOfDays:', numOfDays)
 
-
-  if (numOfDays < 1) {
-    console.log(`${day} --- returning empty array`)
-    return []
+  function checkDayExists(day) {
+    return stateObj.some(function(element) {
+      return element.name === day
+    });
   }
 
-    const dayObj = stateObj.filter(e => e.name === day);
-    if (dayObj.length > 0) {
+  console.log('checkDayExists 1:', checkDayExists('Monday'));
+  console.log('checkDayExists 2:', checkDayExists('Wednesday'));
 
-      const foundDayObj = dayObj[0]
-      const dayAppointments = foundDayObj.appointments;
-      console.log('FOUND FOUND!!:', foundDayObj);
-      console.log('dayAppointments:', dayAppointments)
+//   if (numOfDays < 1) {
+//     console.log(`${day} --- returning empty array`)
+//     return []
+//   }
+
+//     const dayObj = stateObj.filter(e => e.name === day);
+//     if (dayObj.length > 0) {
+
+//       const foundDayObj = dayObj[0]
+//       const dayAppointments = foundDayObj.appointments;
+//       console.log('FOUND FOUND!!:', foundDayObj);
+//       console.log('dayAppointments:', dayAppointments)
       
-      if (dayAppointments.length < 1) {
-        console.log(`${day} not found ------ returning empty array`)
-        return []
-      }
-      return dayAppointments;
-    }
- 
+//       if (dayAppointments.length < 1) {
+//         console.log(`${day} not found ------ returning empty array`)
+//         return []
+//       }
+//       return dayAppointments;
+//     }
+
+
+// outputs: true
+
+    // const checkKey = (state, day) => {
+    //   const stateObj = state.days
+    
+    //   let keyExist = Object.keys(stateObj).some(name => name === day);
+    //   console.log('NAME:', name);
+    //   console.log('CHECK.KEY:', keyExist);
+    // };
+    
   // state.days.forEach(stateDay => {
   //   console.log('-----------------------------------')
   //     if (stateDay.name === day) {
@@ -133,14 +164,19 @@ const getAppointmentsForDay = function(state, day) {
 //     // console.log('state.days.name:', state.days[i].name)
 //     // return state.days[i].name
 //  }
-  console.log(`${day} not found 2 ------ returning empty array`)
- return [];
+//   console.log(`${day} not found 2 ------ returning empty array`)
+//  return [];
    // If there are no appointments on the given day, our days data will be empty -- return an empty array.
-}
+   console.log('RESULT:', result)
+   return result;
+};
+
+// getAppointmentsForDay(state, "Monday")
+// getAppointmentsForDay(state, "Tuesday")
+// getAppointmentsForDay(state, "Wednesday")
 
 getAppointmentsForDay(state, "Monday")
 getAppointmentsForDay(state, "Tuesday")
-getAppointmentsForDay(state, "Wednesday")
 
 // const getAppointmentArray = function(id, state) {
 //   const appointmentResults = [];
