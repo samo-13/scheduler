@@ -1,4 +1,6 @@
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+// import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview } from "helpers/selectors.js"
+// import getInterview from "helpers/selectors.js"
 
 const state = {
   days: [
@@ -14,8 +16,16 @@ const state = {
     }
   ],
   appointments: {
-    "1": { id: 1, time: "12pm", interview: null },
-    "2": { id: 2, time: "1pm", interview: null },
+    "1": { 
+      id: 1, 
+      time: "12pm", 
+      interview: null 
+    },
+    "2": { 
+      id: 2, 
+      time: "1pm", 
+      interview: null 
+    },
     "3": {
       id: 3,
       time: "2pm",

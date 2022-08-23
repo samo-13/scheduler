@@ -1,13 +1,12 @@
 // This creates an object named React which contains methods necessary to use the React library
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import "components/Application.scss";
 import DayList from "components/DayList.js"
-import { statement_timeout } from 'pg/lib/defaults';
+// import { statement_timeout } from 'pg/lib/defaults';
 import "components/Appointment"
 import Appointment from "components/Appointment/index.js"
 import axios from 'axios';
-import getAppointmentsForDay from "helpers/selectors.js"
-import getInterview from "helpers/selectors.js"
+import { getAppointmentsForDay, getInterview } from "helpers/selectors.js"
 
 // ----------------------------------------------------------------
 

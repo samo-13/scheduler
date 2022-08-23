@@ -4,7 +4,7 @@ import Header from "components/Appointment/Header.js";
 import Show from "components/Appointment/Show.js";
 import Empty from "components/Appointment/Empty.js";
 // import classNames from "classnames";
-import useVisualMode from "../../hooks/useVisualMode";
+import useVisualMode from "hooks/useVisualMode";
 
 export default function Appointment(props) {
   
@@ -24,7 +24,8 @@ export default function Appointment(props) {
     <Show
       student={props.interview.student}
       interviewer={props.interview.interviewer}
-    />
+    >
+    </Show>
   )}
     </article>
   )

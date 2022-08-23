@@ -175,7 +175,7 @@ storiesOf("Appointment", module)
   .add("Appointment with Time", () => <Appointment time="12pm" />)
   .add("Header", () => <Header time="12pm" />)
   .add("Empty", () => <Empty onClick={action("onAdd")}/>)
-  .add("Show", () => <Show onEdit={action("onEdit")} onDelete={action("onDelete")}/>) 
+  .add("Show", () => <Show interviewer={interviewer} student={student} onEdit={action("onEdit")} onDelete={action("onDelete")}/>) 
   .add("Confirm", () => <Confirm onConfirm={action("onConfirm")} onCancel={action("onCancel")}/>) 
   .add("Status", () => <Status />)
   .add("Error", () => <Error onClose={action("onClose")}/>)
@@ -194,9 +194,8 @@ storiesOf("Appointment", module)
       <Appointment
         id={1}
         time="4pm"
-        interview={{ student: "Lydia Miller-Jones", interviewer }}
+        interview={{ student, interviewer }}
       />
       <Appointment time="5pm" />
     </Fragment>
   ))
-  

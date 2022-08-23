@@ -1,5 +1,5 @@
 
-// // // // -----------------------------------------------------------------------------------------------
+// // // // // -----------------------------------------------------------------------------------------------
 
 // const state = {
 //   days: [
@@ -55,66 +55,34 @@
 
 // // -- Do validation.
 
-export default function getAppointmentsForDay(state, day) {
-  
+export function getAppointmentsForDay(state, day) {
   // let dayAppointmentsArray = [];
 
-  // if (state.days.length < 1) {
-  //   result = []
-  //   return result;
-  // };
+  if (state.days.length < 1) {
+    return [];
+  };
 
-  // console.log('state.days:', state.days);
   //  // If there are no appointments on the given day, our days data will be empty -- return an empty array.
-  // console.log('-----------------')
 
   //  const dayName = state.days.name
   const daysArray = state.days;
-  //  console.log('daysArray:', daysArray)
-  console.log('DAY:', day)
   const findDayIndex = daysArray.map(daysObject => daysObject.name).indexOf(day)
-  console.log('findDayIndex:', findDayIndex)
-    
-  //   if (stateDay.name === day)
-  //   return true; // success = index of element || failure = -1
-  //  });
-
   
    if (findDayIndex === -1) {
-    console.log(`${day} not found!`)
     return [];
    }
 
    if (findDayIndex > -1) {
     const daysAppointments = daysArray[findDayIndex].appointments;
-    console.log(`${day}: ${daysAppointments}`)
-    return daysAppointments
+    const apps = daysAppointments.map(appointment_id => {
+    return state.appointments[appointment_id];
+    });
+    return apps;
+    // return daysAppointments;
    }
    
   return [];
 };
-
-
-// getAppointmentsForDay(state, "Monday")
-// getAppointmentsForDay(state, "Tuesday")
-// getAppointmentsForDay(state, "Wednesday")
-
-// const getAppointmentArray = function(id, state) {
-//   const appointmentResults = [];
-  
-//   for (const a of Object.values(state.appointments)) {
-//     // console.log(a.id)
-//     // console.log(id)
-//     if (a.id === id) {
-//       appointmentResults.push(a)
-//     }
-//     // console.log('appointment results:', appointmentResults)
-//   }
-//   return appointmentResults;
-//   // return appointments.id
-// }
-
-// getAppointmentsForDay(state, 'Tuesday')
 
 // -----------------------------------------------------------------------------------------------
 
@@ -129,27 +97,27 @@ export default function getAppointmentsForDay(state, day) {
 //   }
 // }
 
-export function getInterview(state, interview){
-    console.log('interview:', interview)
-    console.log('state.appointments[interview].interview:', state.appointments[interview].interview)
-    console.log('state:', state)
+export function getInterview(state, interview) {
+    // console.log("BEING CALLED")
+    // const appointments = state.appointments;
+  // console.log('INTERVIEW:', interview)
+    // let interviewObject = {};
 
-    const interviewObject = state.appointments[interview].interview
-
-    if (interviewObject !== null) {
-      const newInterviewObj = {}
-      const interviewerID = state.appointments[interview].interview.interviewer
-      // console.log('state.appointments[interview].interview.student:', state.appointments[interview].interview.student)
-      newInterviewObj.student = state.appointments[interview].interview.student
-      // console.log('state.interviewers[interviewerID]:', state.interviewers[interviewerID])
-      newInterviewObj.interviewer = state.interviewers[interviewerID]
-      console.log('newInterviewObj:', newInterviewObj)
-      return newInterviewObj
+    if (interview === null) {
+      return null;
     }
-  console.log('No appt booked!')
+    
+    // interview comes in as state.appointments["2"].interview already *** 
+    if (interview !== null) {
+      const newInterviewObj = {}
+      const interviewerID = interview.interviewer
+      newInterviewObj.interviewer = state.interviewers[interviewerID]
+      newInterviewObj.student = interview.student
+      
+      return newInterviewObj;
+    }
+
   return null;
 }
 
-// getInterview(state,"2")
-// getInterview(state,"3")
-// getInterview(state,"4")
+// console.log(getInterview(state, state.appointments["3"].interview))

@@ -67,10 +67,9 @@ export default function Form(props) {
     // interviewer:Number
     // onSave:Function
     // onCancel:Function
-  console.log('props:', props)
+  
   const [student, setStudent] = useState(props.student || ""); // The solution uses the JavaScript || operator which will evaluate to props.student if it is truthy, if undefined then it will use the empty string.
   const [interviewer, setInterviewer] = useState(props.interviewer || null); // Same as the above for props.interviewer and null.
-  console.log('student:', student);
   // Add a reset() function to the Form component that calls setStudent("") and setInterviewer(null).
   const reset = function() {
     return (

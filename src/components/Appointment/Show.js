@@ -1,5 +1,6 @@
 import React from "react";
 import "components/Appointment/styles.scss";
+
 // import Header from "components/Appointment/Header.js";
 // import classNames from "classnames";
 
@@ -19,13 +20,15 @@ import "components/Appointment/styles.scss";
 // --- With our story in place, don't forget to update the component to use the props it is now being passed.
 
 export default function Show(props) {
+  const student = props.student
+
   return (
     <main className="appointment__card appointment__card--show">
       <section className="appointment__card-left">
-        <h2 className="text--regular">Lydia Miller-Jones</h2>
+        <h2 className="text--regular">{student}</h2>
         <section className="interviewer">
           <h4 className="text--light">Interviewer</h4>
-          <h3 className="text--regular">Sylvia Palmer</h3>
+          <h3 className="text--regular">INTERVIEWER</h3>
       </section>
     </section>
     <section className="appointment__card-right">
