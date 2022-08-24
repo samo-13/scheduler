@@ -24,7 +24,9 @@ export default function useVisualMode(initial) { // take in an initial mode
   function transition(mode, replace = false) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
     if (replace === true) { // When replace is true then set the history to reflect that we are replacing the current mode.
       setHistory([...history.slice(0, lastIndex), mode])
+      console.log('TRANSITION 1:', mode)
     } else {
+      console.log('TRANSITION 2:', mode)
       setHistory([...history, mode])
     }
   }
