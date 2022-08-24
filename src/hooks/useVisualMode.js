@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 // A back function will allow us to return to the previous mode
 // The transition function might be used to transition from the "EMPTY" component to the "CREATE" component when a user would like to create a new appointment in a currently empty time slot. 
 // The back function could be used to pop back to the most recent component, such as backing out of the "CONFIRM" component by clicking "Cancel" to go back to the "SHOW" component.
+// https://reactjs.org/docs/hooks-state.html
 
 export default function useVisualMode(initial) { // take in an initial mode
 
@@ -33,7 +34,10 @@ export default function useVisualMode(initial) { // take in an initial mode
   // When back is called, we should set the mode to the previous item in our history array.
   function back() {
       const newHistory = [...history.slice(0, lastIndex)]
+      console.log('BACK:', newHistory)
       setHistory(newHistory)
+      // setMode(history);
+      // console.log('NEW HISTORY:', mode)
     }
   
   return { mode:history[lastIndex], transition, back }; // return an object with a mode property
