@@ -20,19 +20,19 @@ export default function Appointment(props) {
 
   return (
     <article className="appointment">
-    <Header time={props.time}></Header>
+      <Header time={props.time}></Header>
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE, true)} />}
       {mode === SHOW && (
-    <Show
-      student={props.interview.student}
-      interviewer={props.interview.interviewer}
-    />
-    )}
-        {mode === CREATE && (
-          <Form 
-            interviewers={[]}
-          />
-        )}
+        <Show
+          student={props.interview.student}
+          interviewer={props.interview.interviewer}
+        />
+      )}
+      {mode === CREATE && (
+        <Form 
+          interviewers={[]}
+        />
+      )}
     </article>
   )
 }
