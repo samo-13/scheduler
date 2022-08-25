@@ -86,6 +86,38 @@ export function getAppointmentsForDay(state, day) {
 
 // -----------------------------------------------------------------------------------------------
 
+export function getInterviewersForDay(state, day) {
+  // let dayAppointmentsArray = [];
+
+  if (state.days.length < 1) {
+    return [];
+  };
+
+  //  // If there are no appointments on the given day, our days data will be empty -- return an empty array.
+
+  //  const dayName = state.days.name
+  const daysArray = state.days;
+  const findDayIndex = daysArray.map(daysObject => daysObject.name).indexOf(day)
+  
+   if (findDayIndex === -1) {
+    return [];
+   }
+
+   if (findDayIndex > -1) {
+    const daysInterviewers = daysArray[findDayIndex].interviewers;
+    console.log('daysInterviewers:', daysInterviewers)
+    const interviewersArray = daysInterviewers.map(interviewer_id => {
+    return state.interviewers[interviewer_id];
+    });
+    return interviewersArray;
+    // return daysAppointments;
+   }
+   
+  return [];
+};
+
+// -----------------------------------------------------------------------------------------------
+
 // Should return a new object containing the interview data when we pass it an object that contains the interviewer. 
 // Otherwise, the function should return null. The object it returns should look like this:
 // {  
