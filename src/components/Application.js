@@ -6,7 +6,7 @@ import DayList from "components/DayList.js"
 import "components/Appointment"
 import Appointment from "components/Appointment/index.js"
 import axios from 'axios';
-import { getAppointmentsForDay, getInterview } from "helpers/selectors.js"
+import { getAppointmentsForDay, getInterviewersForDay, getInterview } from "helpers/selectors.js"
 
 // ----------------------------------------------------------------
 
@@ -88,23 +88,6 @@ export default function Application(props) {
   //   setState(prev => ({ ...prev, days }));
   // };
 
-  // console.log('state.interviewers:', state.interviewers)
-
-  // console.log('day:', day)
-  // console.log('props:', props)
-  // console.log('Object.values(appointments).map():', Object.values(appointments))
-  // console.log('APPOINTMENT:', Appointment)
-  // const appointmentsTest = Object.values(appointments)
-  // console.log(typeof(appointmentsTest))
-  // const appointmentsMapped = appointmentsTest.map()
-  // console.log('appointmentsMapped:', appointmentsMapped)
-  // const entries = Object.entries(appointments)
-  // console.log('ENTRIES:', entries)
-  // const mappedEntries = entries.map();
-  // console.log('mappedEntries:', mappedEntries);
-  // console.log('Object.values(appointments).map():', Object.values(appointments).map())
-  // const appointmentList = Object.values(appointments).map()
-
   useEffect(() => {
     Promise.all([
       axios.get('http://localhost:8001/api/days'),
@@ -118,29 +101,28 @@ export default function Application(props) {
     })
   }, [])
 
-  // setDays(days)
-// const dailyAppointments = getAppointmentsForDay(state, state.day)
-// console.log('days:', days)
-// console.log('this.state:', this.state)
-// getAppointmentsForDay(days, 'Tuesday');
-// console.log('state.day:', state.day)
-// console.log('state.interviewers:', state.interviewers)
+  const appointments = getAppointmentsForDay(state, state.day);
+  
 
-const appointments = getAppointmentsForDay(state, state.day);
+  
+  
 
-const schedule = appointments.map((appointment) => {
-  const interview = getInterview(state, appointment.interview);
+  const schedule = appointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+    const interviewers = getInterviewersForDay(state, state.day);
+    console.log('INTERVIEWERS:', interviewers)
+    
 
-  return (
-    <Appointment
-      key={appointment.id}
-      id={appointment.id}
-      time={appointment.time}
-      interview={interview}
-      
-    />
-  );
-});
+    return (
+      <Appointment
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interviewers={interviewers}
+        interview={interview}
+      />
+    );
+  });
 
   return (
     <main className="layout">
