@@ -81,7 +81,9 @@ export default function Form(props) {
     )
   };
 
-  // Add a cancel function to the <Form> component that calls reset() and props.onCancel. We should also update our Form component so it's called when a user clicks the Cancel button.
+  // Add a cancel function to the <Form> component that calls reset() and props.onCancel. 
+  // We should also update our Form component so it's called when a user clicks the Cancel button.
+  
   const cancel = function() {
     return (
       reset(),
@@ -102,7 +104,7 @@ export default function Form(props) {
             placeholder="Enter Student Name"
           />
         </form>
-        <InterviewerList 
+        <InterviewerList
           interviewers={props.interviewers} interviewer={interviewer} setInterviewer={setInterviewer}
         />
       </section>

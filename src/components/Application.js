@@ -127,11 +127,38 @@ export default function Application(props) {
       .then(() => {
         console.log(`in AXIOS PUT request for /api/appointments/${id}`)
         
-        setState(prev => ({...state, appointments}))
+        setState({...state, appointments})
         console.log('APPOINTMENTS:', appointments)
       })
 
     } 
+
+  // -------------------------------------------------------------------------------------------
+
+  // create the main cancelInterview function in Application.js, 
+  // --- it uses the appointment id to find the right appointment slot and set it's interview data to null.
+  // Add the rest of the local and remote delete behaviour to the Appointment component.
+  
+
+  function cancelInterview(id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null // after we delete an interview, it will need to have its value set to null. // If we are still in the SHOW mode and the interview isn't set to null, we may get a TypeError. 
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    
+    return axios.delete(`/api/appointments/${id}`, appointment)
+    .then(() => {
+      console.log(`in AXIOS PUT request for /api/appointments/${id}`)
+      
+      setState({...state, appointments})
+      console.log('APPOINTMENTS:', appointments)
+    }
+  )}
 
     return (
       <Appointment
@@ -141,6 +168,7 @@ export default function Application(props) {
         interviewers={interviewers}
         interview={interview}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });

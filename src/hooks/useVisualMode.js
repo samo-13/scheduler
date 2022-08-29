@@ -11,9 +11,6 @@ export default function useVisualMode(initial) { // take in an initial mode
 
   const [mode, setMode] = useState(initial); // set the mode state with the initial mode provided
   const [history, setHistory] = useState([initial]); // initializing our history as an array with the first mode that gets passed to useVisualMode
-  const currentMode = mode;
-
-  console.log('CURRENT MODE:', currentMode)
 
   // STOP mode from being empty onCancel 
   // if (currentMode === undefined) {
@@ -26,33 +23,40 @@ export default function useVisualMode(initial) { // take in an initial mode
   // This custom Hook will need to add the transition property to the object that useVisualMode returns. 
   // The property will point to a function that we implement directly in the custom Hook.
 
-  const lastIndex = (history.length - 1)
-
   // When transition is called, we need to add the new mode to our history
   // Add the new mode to our history array using spread
   function transition(mode, replace = false) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
-    if (replace === true) { // When replace is true then set the history to reflect that we are replacing the current mode.
-      history.pop()
-      setHistory(() => [...history, mode])
-      console.log(`Transition from ${initial} to ${mode}.`)
-      return setMode(mode)
-    } else {
-      setHistory(previousMode => [...previousMode, mode])
+    if (!replace) { // When replace is true then set the history to reflect that we are replacing the current mode.
+      // setHistory(prev => [...prev, mode])
       console.log(`mode not changed - remaining as ${mode}`)
-      return setMode(mode)
+      setMode(mode)
+      return mode
+
+    } else {
+      
+      setHistory(() => [...history, initial])
+      console.log(`Transition from ${initial} to ${mode}.`)
+      history.splice(0, history.length-1)
+      setMode(mode)
+      return mode
     }
   }
 
   // When back is called, we should set the mode to the previous item in our history array.
   function back() {
-    history.pop()
-    if (history[lastIndex] === undefined) {
-      console.log(`Back to ${history[lastIndex]} from ${mode}.`)
-      return setMode('EMPTY')
-    } else 
-      console.log(`Back to ${history[lastIndex]} from ${mode}.`)
-      return setMode(history[lastIndex])
-  }
 
+    if (history.length === 1) {
+      setMode('EMPTY')
+      return mode
+    }
+
+    else {
+      history.splice(0, history.length-1)
+      console.log('HISTORY', history)
+      console.log(`Back to ${history[history.length-1]} from ${mode}.`)
+      setMode(history[history.length-1])
+      return mode
+    }
+  }
   return { mode, transition, back }; // return an object with a mode property
-};
+}
