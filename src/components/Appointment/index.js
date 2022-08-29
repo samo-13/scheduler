@@ -30,6 +30,9 @@ export default function Appointment(props) {
     // console.log('SAVE NAME:', name)
     // console.log('SAVE INTERVIEWER:', interviewer)
     props.bookInterview(props.id, interview)
+
+    transition(SHOW) // Within the save function in our Appointment component transition to the SHOW mode after calling props.bookInterview.
+
   }
 
   return (
