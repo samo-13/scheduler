@@ -68,14 +68,15 @@ export default function Form(props) {
     // onSave:Function
     // onCancel:Function
   
-  const [student, setStudent] = useState(props.student || ""); // The solution uses the JavaScript || operator which will evaluate to props.student if it is truthy, if undefined then it will use the empty string.
+  // const [student, setStudent] = useState(props.student || ""); // The solution uses the JavaScript || operator which will evaluate to props.student if it is truthy, if undefined then it will use the empty string.
   const [interviewer, setInterviewer] = useState(props.interviewer || null); // Same as the above for props.interviewer and null.
-  
+  const [name, setName] = useState(props.name || "")
   
   // Add a reset() function to the Form component that calls setStudent("") and setInterviewer(null).
   const reset = function() {
     return (
-      setStudent(""),
+      // setStudent(""),
+      setName(""),
       setInterviewer(null)
     )
   };
@@ -96,8 +97,8 @@ export default function Form(props) {
             className="appointment__create-input text--semi-bold"
             name="name"
             type="text"
-            value={student}
-            onChange={(event) => setStudent(event.target.value)}
+            value={name}
+            onChange={(event) => setName(event.target.value)}
             placeholder="Enter Student Name"
           />
         </form>
@@ -108,7 +109,7 @@ export default function Form(props) {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={() => props.onSave(student, interviewer)}>Save</Button>
+          <Button confirm onClick={() => props.onSave(name, interviewer)}>Save</Button>
         </section>
       </section>
     </main>

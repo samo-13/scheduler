@@ -17,7 +17,23 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+
+  // Call the props.bookInterview function with the appointment id and interview as arguments from within the save function. 
+  // Verify that the id and interview values are correct in the console output.
+
+  function save(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer
+    };
+    // console.log('SAVE INTERVIEW:', interview)
+    // console.log('SAVE NAME:', name)
+    // console.log('SAVE INTERVIEWER:', interviewer)
+    props.bookInterview(props.id, interview)
+  }
+
   return (
+
     <article className="appointment">
       <Header time={props.time}></Header>
 
@@ -38,6 +54,7 @@ export default function Appointment(props) {
         <Form
           interviewers={props.interviewers}
           onCancel={() => back()}
+          onSave={save}
         />
       }
 
