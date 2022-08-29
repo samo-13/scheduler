@@ -27,7 +27,7 @@ export default function useVisualMode(initial) { // take in an initial mode
   // Add the new mode to our history array using spread
   function transition(mode, replace = false) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
     if (!replace) { // When replace is true then set the history to reflect that we are replacing the current mode.
-      // setHistory(prev => [...prev, mode])
+      setHistory(prev => [...prev, mode])
       console.log(`mode not changed - remaining as ${mode}`)
       setMode(mode)
       return mode
@@ -38,24 +38,28 @@ export default function useVisualMode(initial) { // take in an initial mode
       console.log(`Transition from ${initial} to ${mode}.`)
       history.splice(0, history.length-1)
       setMode(mode)
-      return mode
+      // return mode
     }
   }
 
   // When back is called, we should set the mode to the previous item in our history array.
   function back() {
 
-    if (history.length === 1) {
-      setMode('EMPTY')
-      return mode
+    
+
+    if (history.length === 1 ) {
+      setHistory(() => [...history, initial])
+      setMode(mode)
+      // return mode
     }
 
     else {
+      setHistory(() => [...history, initial])
       history.splice(0, history.length-1)
       console.log('HISTORY', history)
-      console.log(`Back to ${history[history.length-1]} from ${mode}.`)
+      console.log(`BACK to ${history[history.length-1]} from ${mode}.`)
       setMode(history[history.length-1])
-      return mode
+      // return mode
     }
   }
   return { mode, transition, back }; // return an object with a mode property
