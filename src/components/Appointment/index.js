@@ -6,12 +6,14 @@ import Empty from "components/Appointment/Empty.js";
 import Form from "components/Appointment/Form.js";
 // import classNames from "classnames";
 import useVisualMode from "hooks/useVisualMode";
+import Status from "components/Appointment/Status.js";
 
 export default function Appointment(props) {
   
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
+  const SAVING = "SAVING";
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -22,6 +24,9 @@ export default function Appointment(props) {
   // Verify that the id and interview values are correct in the console output.
 
   function save(name, interviewer) {
+    transition(SAVING) // transition to the SAVING mode when starting the save operation.
+
+
     const interview = {
       student: name,
       interviewer
@@ -58,6 +63,12 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onCancel={() => back()}
           onSave={save}
+        />
+      }
+
+      {mode === SAVING && 
+        <Status 
+          message={SAVING}
         />
       }
 

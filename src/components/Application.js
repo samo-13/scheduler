@@ -84,9 +84,6 @@ export default function Application(props) {
   });
 
   const setDay = day => setState({ ...state, day });
-  // const setDays = (days) => {
-  //   setState(prev => ({ ...prev, days }));
-  // };
 
   useEffect(() => {
     Promise.all([
@@ -125,6 +122,14 @@ export default function Application(props) {
         ...state,
         appointments
       }); // call setState with our new state object
+
+      return axios.put(`/api/appointments/${id}`, appointment)
+      .then(() => {
+        console.log(`in AXIOS PUT request for /api/appointments/${id}`)
+        
+        setState(prev => ({...state, appointments}))
+        console.log('APPOINTMENTS:', appointments)
+      })
 
     } 
 
