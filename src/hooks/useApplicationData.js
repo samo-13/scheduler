@@ -54,6 +54,7 @@ export default function useApplicationData() {
 
     return axios.put(`/api/appointments/${id}`, appointment)
     .then(() => {
+
       console.log(`in AXIOS PUT request for /api/appointments/${id}`)
       
       setState({...state, appointments})
@@ -82,7 +83,6 @@ export default function useApplicationData() {
     return axios.delete(`/api/appointments/${id}`, appointment)
     .then(() => {
       console.log(`in AXIOS PUT request for /api/appointments/${id}`)
-      
       setState({...state, appointments})
       console.log('APPOINTMENTS:', appointments)
     }
