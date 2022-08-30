@@ -31,9 +31,7 @@ export default function Appointment(props) {
 
   // Call the props.bookInterview function with the appointment id and interview as arguments from within the save function. 
   // Verify that the id and interview values are correct in the console output.
-
   function save(name, interviewer) {
-    
     const interview = {
       student: name,
       interviewer
@@ -86,7 +84,7 @@ export default function Appointment(props) {
       {mode === CREATE &&
         <Form
           interviewers={props.interviewers}
-          onCancel={back}
+          onCancel={() => back(EMPTY)}
           onSave={save}
         />
       }
@@ -106,7 +104,7 @@ export default function Appointment(props) {
       {mode === CONFIRM && 
         <Confirm
           onCancel={() => back()}
-          onConfirm={deleteAppointment}
+          onConfirm={() => deleteAppointment()}
         />
       }
 
@@ -115,7 +113,7 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           name={props.interview.student}
           interviewer={props.interview.interviewer.id}
-          onCancel={back}
+          onCancel={() => back()}
           onSave={save}
         />
       )}

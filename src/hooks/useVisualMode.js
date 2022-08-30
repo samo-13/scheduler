@@ -25,6 +25,7 @@ export default function useVisualMode(initial) { // take in an initial mode
 
   // When transition is called, we need to add the new mode to our history
   // Add the new mode to our history array using spread
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
   function transition(mode, replace = false) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
     if (!replace) { // When replace is true then set the history to reflect that we are replacing the current mode.
       setHistory(prev => [...prev, mode])
