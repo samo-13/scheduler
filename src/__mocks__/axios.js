@@ -87,3 +87,5 @@ export default { // export our fake axios library
   })
 }
 
+// https://jestjs.io/docs/asynchronous 
+// https://jestjs.io/docs/manual-mocks 
