@@ -7,6 +7,8 @@ import Application from "components/Application";
 
 afterEach(cleanup);
 
-it("renders without crashing", () => {
+// change test.skip back to it to run test
+
+test.skip("renders without crashing", () => {
   render(<Application />);
 });

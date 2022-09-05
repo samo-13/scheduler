@@ -85,7 +85,8 @@ export default function Form(props) {
       setError("Please select an interviewer");
       return;
     }
-  
+
+    setError("") // clear the error on successful submission.
     props.onSave(name, interviewer);
   }
   
