@@ -2,6 +2,7 @@ import React from "react";
 import "components/InterviewerListItem.js";
 import "components/InterviewerList.scss";
 import InterviewerListItem from "components/InterviewerListItem.js";
+import PropTypes from 'prop-types'; // for testing
 // import classNames from "classnames";
 
 // ------------------------------------------------------------------------
@@ -45,6 +46,12 @@ export default function InterviewerList(props) {
   )
 };
 
+// ------------------------------------------------------------------------
+// PropTypes Test Code
+
+InterviewerList.propTypes = {
+  interviewers: PropTypes.array.isRequired
+};
 
 // ------------------------------------------------------------------------
 // DEV NOTES

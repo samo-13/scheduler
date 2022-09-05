@@ -71,6 +71,23 @@ export default function Form(props) {
   // const [student, setStudent] = useState(props.student || ""); // The solution uses the JavaScript || operator which will evaluate to props.student if it is truthy, if undefined then it will use the empty string.
   const [interviewer, setInterviewer] = useState(props.interviewer || null); // Same as the above for props.interviewer and null.
   const [name, setName] = useState(props.name || "")
+  const [error, setError] = useState("");
+
+
+
+  function validate() {
+    if (name === "") {
+      setError("Student name cannot be blank");
+      return;
+    }
+
+    if (interviewer === null) {
+      setError("Please select an interviewer");
+      return;
+    }
+  
+    props.onSave(name, interviewer);
+  }
   
   // Add a reset() function to the Form component that calls setStudent("") and setInterviewer(null).
   const reset = function() {
@@ -95,15 +112,19 @@ export default function Form(props) {
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
         <form autoComplete="off" onSubmit={event => event.preventDefault()}>
-          <input
-            className="appointment__create-input text--semi-bold"
-            name="name"
-            type="text"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            placeholder="Enter Student Name"
-          />
+        <input
+          className="appointment__create-input text--semi-bold"
+          name="name"
+          type="text"
+          placeholder="Enter Student Name"
+          value={name}
+          onChange={event => {
+            setName(event.target.value);
+          }}
+          data-testid="student-name-input"
+        />
         </form>
+        <section className="appointment__validation">{error}</section>
         <InterviewerList
           interviewers={props.interviewers} interviewer={interviewer} setInterviewer={setInterviewer}
         />

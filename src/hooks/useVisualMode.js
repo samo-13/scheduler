@@ -12,6 +12,7 @@ export default function useVisualMode(initial) { // take in an initial mode
   const [mode, setMode] = useState(initial); // set the mode state with the initial mode provided
   const [history, setHistory] = useState([initial]); // initializing our history as an array with the first mode that gets passed to useVisualMode
 
+  
   // STOP mode from being empty onCancel 
   // if (currentMode === undefined) {
   //   setMode('EMPTY')
@@ -26,42 +27,76 @@ export default function useVisualMode(initial) { // take in an initial mode
   // When transition is called, we need to add the new mode to our history
   // Add the new mode to our history array using spread
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
-  function transition(mode, replace = false) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
-    if (!replace) { // When replace is true then set the history to reflect that we are replacing the current mode.
-      setHistory(prev => [...prev, mode])
-      console.log(`mode not changed - remaining as ${mode}`)
-      setMode(mode)
-      return mode
-
-    } else {
-      
-      setHistory(() => [...history, initial])
-      console.log(`Transition from ${initial} to ${mode}.`)
-      history.splice(0, history.length-1)
-      setMode(mode)
-      // return mode
-    }
-  }
-
-  // When back is called, we should set the mode to the previous item in our history array.
-  function back() {
-
+//   function transition(mode, replace = false) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
     
+//     if (!replace) { // When replace is true then set the history to reflect that we are replacing the current mode.
+//       console.log(`mode not changed - remaining as ${mode}`)
+//       setMode(mode)
+//       return mode
 
-    if (history.length === 1 ) {
-      setHistory(() => [...history, initial])
-      setMode(mode)
-      // return mode
-    }
+//     } else {
+//       setHistory(() => [...history, initial])
+//       console.log(`Transition from ${initial} to ${mode}.`)
+//       history.splice(0, history.length-1)
+//       setMode(mode)
+//       return mode
+//     }
+//   }
 
-    else {
-      setHistory(() => [...history, initial])
-      history.splice(0, history.length-1)
-      console.log('HISTORY', history)
-      console.log(`BACK to ${history[history.length-1]} from ${mode}.`)
-      setMode(history[history.length-1])
-      // return mode
-    }
+//   // When back is called, we should set the mode to the previous item in our history array.
+//   function back() {
+//     setHistory(prev => [...prev, initial])
+//     console.log('HISTOUR:', history)
+
+//     // if (history.length === 1 ) {
+//     //   setHistory(() => [...history, initial])
+//     //   setMode(mode)
+//     //   return mode
+//     // }
+
+//     // else {
+//     //   setHistory(() => [...history, initial])
+
+//       history.splice(0, history.length-1)
+//       console.log('HISTORY', history)
+//       console.log(`BACK to ${history[history.length-1]} from ${mode}.`)
+//       setMode(history[history.length-1])
+//       // return mode
+//     }
+//   // }
+//   return { mode, transition, back }; // return an object with a mode property
+// }
+
+
+
+  const transition = function(mode, replace = false) {
+
+  if (replace === true) {
+    // history.pop() // remove the last item from the history array
+    console.log('HISTORY IN REPLACE TRANSITION BEFORE SETHISTORY:', history)
+    setHistory(() => [...history, mode]) 
+    console.log('HISTORY IN REPLACE TRANSITION AFTER SETHISTORY:', history)
+    console.log('MODE:', mode)
+    setMode(mode)
+    return mode
   }
-  return { mode, transition, back }; // return an object with a mode property
+
+  if (replace === false) {
+    console.log('HISTORY IN TRANSITION before SET HISTORY:', history)
+    setHistory(prev => [...prev, mode])
+    console.log('HISTORY IN TRANSITION after SET HISTORY:', history)
+    console.log('MODE:', mode)
+    setMode(mode)
+    return mode
+  } 
+
 }
+
+const back = function() {
+  history.pop()
+  return setMode(history[history.length-1])
+}
+
+return { mode, transition, back }
+}
+

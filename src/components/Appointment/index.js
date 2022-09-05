@@ -41,7 +41,7 @@ export default function Appointment(props) {
   
     props
       .bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
+      .then(() => transition(SHOW, true))
       .catch(error => transition(ERROR_SAVE, true));
   }
 
@@ -50,12 +50,12 @@ export default function Appointment(props) {
   
     props
     .cancelInterview(props.id)
-    .then(() => transition(DELETING))
-    .then(() => transition(EMPTY))
+    .then(() => transition(DELETING, true))
+    .then(() => transition(EMPTY, true))
     .catch(error => transition(ERROR_DELETE, true))
     
     console.log(`Appointment with id: ${props.id} has been deleted`)
-    transition(EMPTY)
+    transition(EMPTY, true)
   }
 
   function editAppointment() {
@@ -68,7 +68,7 @@ export default function Appointment(props) {
       <Header time={props.time}></Header>
 
       {mode === EMPTY &&
-        <Empty 
+        <Empty
           onAdd={() => transition(CREATE, true)} 
         />
       }
@@ -85,7 +85,7 @@ export default function Appointment(props) {
       {mode === CREATE &&
         <Form
           interviewers={props.interviewers}
-          onCancel={() => back(EMPTY)}
+          onCancel={() => back()}
           onSave={save}
         />
       }
