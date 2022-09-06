@@ -1,6 +1,16 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent } from "@testing-library/react";
+import { 
+  render, 
+  cleanup, 
+  waitForElement, 
+  fireEvent, 
+  getByText, 
+  prettyDOM, 
+  getAllByTestId, 
+  getByAltText, 
+  getByPlaceholderText 
+} from "@testing-library/react";
 // import { renderHook } from '@testing-library/react'
 
 import Application from "components/Application";
@@ -53,3 +63,40 @@ it("defaults to Monday and changes the schedule when a new day is selected", () 
     expect(getByText("Leopold Silvers")).toBeInTheDocument();
   });
 });
+
+// --------------------------------------------------------------------------------
+// 
+// 
+// 
+//
+// 
+// Check that the element with the text "Saving" is displayed.
+// Wait until the element with the text "Lydia Miller-Jones" is displayed.
+// Check that the DayListItem with the text "Monday" also has the text "no spots remaining".
+// --------------------------------------------------------------------------------
+
+  it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
+    const { container } = render(<Application />); // Render the Application.
+  
+    await waitForElement(() => getByText(container, "Archie Cohen")); // Wait until the text "Archie Cohen" is displayed.
+    // Use the async and await syntax
+  
+    const appointments = getAllByTestId(container, "appointment");
+    console.log(prettyDOM(appointments));
+
+    const appointment = appointments[0];
+    console.log(prettyDOM(appointment));
+  
+    fireEvent.click(getByAltText(appointment, "Add")); // Click the "Add" button on the first empty appointment.
+  
+    // Enter the name "Lydia Miller-Jones" into the input with the placeholder "Enter Student Name".
+    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {  
+      target: { value: "Lydia Miller-Jones" }
+    });
+
+    fireEvent.click(getByAltText(appointment, "Sylvia Palmer")); // Click the first interviewer in the list.
+  
+    fireEvent.click(getByText(appointment, "Save")); // Click the "Save" button on that same appointment.
+  
+    console.log(prettyDOM(appointment));
+  });

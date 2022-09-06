@@ -29,8 +29,6 @@ export default function useApplicationData() {
       console.log('TEST:', all[2].data); // third
     })
   }, [])
-
-  
   
   // -------------------------------------------------------------------------------------------
 
