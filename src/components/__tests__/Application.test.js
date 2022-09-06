@@ -9,16 +9,14 @@ import {
   prettyDOM, 
   getAllByTestId, 
   getByAltText, 
-  getByPlaceholderText 
+  getByPlaceholderText,
+  queryByText
 } from "@testing-library/react";
 // import { renderHook } from '@testing-library/react'
 
 import Application from "components/Application";
 
-
-
 afterEach(cleanup);
-
 
 // We will mock the functions we use from the axios library.
 // We will write a test to confirm that the scheduler can load data.
@@ -76,16 +74,16 @@ it("defaults to Monday and changes the schedule when a new day is selected", () 
 // --------------------------------------------------------------------------------
 
   it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
-    const { container } = render(<Application />); // Render the Application.
+    const { container, debug } = render(<Application />); // Render the Application.
   
     await waitForElement(() => getByText(container, "Archie Cohen")); // Wait until the text "Archie Cohen" is displayed.
     // Use the async and await syntax
   
     const appointments = getAllByTestId(container, "appointment");
-    console.log(prettyDOM(appointments));
+    // console.log(prettyDOM(appointments));
 
     const appointment = appointments[0];
-    console.log(prettyDOM(appointment));
+    // console.log(prettyDOM(appointment));
   
     fireEvent.click(getByAltText(appointment, "Add")); // Click the "Add" button on the first empty appointment.
   
@@ -97,6 +95,20 @@ it("defaults to Monday and changes the schedule when a new day is selected", () 
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer")); // Click the first interviewer in the list.
   
     fireEvent.click(getByText(appointment, "Save")); // Click the "Save" button on that same appointment.
-  
-    console.log(prettyDOM(appointment));
+    expect(getByText(appointment, "SAVING")).toBeInTheDocument();
+    await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
+    // expect(getByText(appointment, "SAVING")).not.toBeInTheDocument();
+    // console.log(prettyDOM(appointment));
+    // debug()
+
+    const day = getAllByTestId(container, "day").find(day =>
+      queryByText(day, "Monday")  
+    );
+
+    debug()
+
+    expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+    
   });
+
+  
