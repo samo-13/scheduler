@@ -81,7 +81,7 @@ it("defaults to Monday and changes the schedule when a new day is selected", () 
 
     const appointments = getAllByTestId(container, "appointment");
     const appointment = appointments[0];
-console.log(prettyDOM(appointment))
+    console.log(prettyDOM(appointment))
     fireEvent.click(getByAltText(appointment, "Add"));
 
     fireEvent.change(getByPlaceholderText(appointment, /Enter Student Name/i), {
@@ -94,13 +94,15 @@ console.log(prettyDOM(appointment))
 
     expect(getByText(appointment, "SAVING")).toBeInTheDocument();
 
-    await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
+    await waitForElement(() => queryByText(appointment, "Lydia Miller-Jones"));
 
     const day = getAllByTestId(container, "day").find(day =>
-      queryByText(day, "Monday")
+      getByText(day, "Monday")
     );
 
-    expect(getByText(day, "no spots remaining")).toBeInTheDocument();
+    console.log(prettyDOM(container))
+
+    expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
   });
 })
 
