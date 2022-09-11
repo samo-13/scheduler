@@ -93,7 +93,7 @@ export default { // export our fake axios library
       return Promise.resolve({
         status: 204, 
         statusText: "No Content",
-        data: fixtures
+        // data: fixtures.days
       })
     }),
 
@@ -101,8 +101,7 @@ export default { // export our fake axios library
       return Promise.resolve({
         status: 204, 
         statusText: "No Content",
-        data: fixtures
-        
+        // data: fixtures
       })
     })
   }
