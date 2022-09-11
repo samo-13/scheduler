@@ -73,23 +73,22 @@ export default function useVisualMode(initial) { // take in an initial mode
 
   if (replace === true) {
     // history.pop() // remove the last item from the history array
-    console.log('HISTORY IN REPLACE TRANSITION BEFORE SETHISTORY:', history)
+    // console.log('HISTORY IN REPLACE TRANSITION BEFORE SETHISTORY:', history)
     setHistory(() => [...history, mode]) 
-    console.log('HISTORY IN REPLACE TRANSITION AFTER SETHISTORY:', history)
-    console.log('MODE:', mode)
+    // console.log('HISTORY IN REPLACE TRANSITION AFTER SETHISTORY:', history)
+    // console.log('MODE:', mode)
     setMode(mode)
     return mode
   }
 
   if (replace === false) {
-    console.log('HISTORY IN TRANSITION before SET HISTORY:', history)
+    // console.log('HISTORY IN TRANSITION before SET HISTORY:', history)
     setHistory(prev => [...prev, mode])
-    console.log('HISTORY IN TRANSITION after SET HISTORY:', history)
-    console.log('MODE:', mode)
+    // console.log('HISTORY IN TRANSITION after SET HISTORY:', history)
+    // console.log('MODE:', mode)
     setMode(mode)
     return mode
   } 
-
 }
 
 const back = function() {

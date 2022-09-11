@@ -3,7 +3,7 @@ const fixtures = {
     {
       id: 1,
       name: "Monday",
-      appointments: [1, 2],
+      appointments: [1, 2], // Archie Cohen is ID 2 -- ID 1 is an available appointment
       interviewers: [1, 2],
       spots: 1
     },
@@ -92,14 +92,17 @@ export default { // export our fake axios library
   put: jest.fn(url => { 
       return Promise.resolve({
         status: 204, 
-        statusText: "No Content"
+        statusText: "No Content",
+        data: fixtures
       })
     }),
 
     delete: jest.fn(url => { 
       return Promise.resolve({
         status: 204, 
-        statusText: "No Content"
+        statusText: "No Content",
+        data: fixtures
+        
       })
     })
   }

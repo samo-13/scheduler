@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -15,7 +16,6 @@ export default function useApplicationData() {
     appointments: {}
   });
 
-  const setDay = day => setState({ ...state, day });
 
   useEffect(() => {
     Promise.all([
@@ -23,17 +23,29 @@ export default function useApplicationData() {
       axios.get('http://localhost:8001/api/appointments'),
       axios.get('http://localhost:8001/api/interviewers')
     ]).then((all) => {
-      console.log(all[1].data)
+      // console.log(all[1].data)
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
-      console.log('ALL:', all)
-      console.log('TEST:', all[2].data); // third
+      // console.log('ALL:', all)
+      // console.log('APPOINTMENTS TEST:', all[1].data);
+      // console.log('DAYS TEST:', all[0].data.day);
+      // console.log('SPOTS TEST:', all[0].data[0].spots);
     })
   }, [])
+  
+  const setDay = day => setState({ ...state, day });
+  // console.log('SET DAY:', setDay)
+  // console.log('STATE:', state)
+
+  // -------------------------------------------------------------------------------------------
+  
+  // function updateSpots() {
+  //   console.log('updateSpots')
+  // }
   
   // -------------------------------------------------------------------------------------------
 
   function bookInterview(id, interview) {
-    console.log('BOOK INTERVIEW:', id, interview);
+    // console.log('BOOK INTERVIEW:', id, interview);
 
     const appointment = {
       ...state.appointments[id],
@@ -45,18 +57,21 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    setState({
-      ...state,
-      appointments
-    }); // call setState with our new state object
+    // setState({
+    //   ...state,
+    //   appointments
+    // }); // call setState with our new state object
 
     return axios.put(`/api/appointments/${id}`, appointment)
-    .then(() => {
-
-      console.log(`in AXIOS PUT request for /api/appointments/${id}`)
-      
-      setState({...state, appointments})
-      console.log('APPOINTMENTS:', appointments)
+    .then(() => axios.get('/api/days')) // added to axios to update spots
+    .then((response) => { 
+      const days = response.data
+      setState({...state, appointments, days})
+      // console.log('APPOINTMENTS:', appointments)
+      // console.log('BOOK INTERVIEW STATE:', state)
+      // console.log('BOOK INTERVIEW STATE.DAYS:', state.days)
+      // console.log('STATE DAYS NAME:', state.days.name("Monday"))
+      // console.log('BOOK INTERVIEW SPOTS TEST:', state.day.spots);
     })
   } 
 
@@ -79,10 +94,13 @@ export default function useApplicationData() {
     };
     
     return axios.delete(`/api/appointments/${id}`, appointment)
-    .then(() => {
-      console.log(`in AXIOS PUT request for /api/appointments/${id}`)
-      setState({...state, appointments})
-      console.log('APPOINTMENTS:', appointments)
+    .then(() => axios.get(`/api/days`)) // added to axios to update spots
+    .then((response) => {
+      const days = response.data
+      // console.log(`in AXIOS PUT request for /api/appointments/${id}`)
+      setState({...state, appointments, days})
+      // console.log('APPOINTMENTS:', appointments)
+      // console.log('cancelInterview DAYS:', days)
     }
   )}
 
@@ -93,3 +111,6 @@ export default function useApplicationData() {
     cancelInterview
   }
 }
+
+// --------------------------------------------------------------------
+// https://www.freecodecamp.org/news/how-to-use-axios-with-react/ 
