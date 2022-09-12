@@ -184,11 +184,13 @@ it("loads data, edits an interview and keeps the spots remaining for Monday the 
 // --------------------------------------------------------------------------------
 // Handling errors when either fails
 // --------------------------------------------------------------------------------
-  it("shows the save error when failing to save an appointment", () => {
-    axios.put.mockRejectedValueOnce();
-});
+//   it("shows the save error when failing to save an appointment", () => {
+//     axios.put.mockRejectedValueOnce();
+// });
 
   it("shows the save error when failing to save an appointment", async () => {
+    axios.put.mockRejectedValueOnce();
+
       // Render the Application.
   const { container } = render(<Application />);
 
@@ -218,7 +220,33 @@ it("loads data, edits an interview and keeps the spots remaining for Monday the 
   await waitForElement(() => getByText(appointment, "Could not save appointment."))
 })
 
-  it("shows the delete error when failing to delete an existing appointment", () => {
-}) 
+  it("shows the delete error when failing to delete an existing appointment", async () => {
+  // 1. Render the Application.
+  axios.delete.mockRejectedValueOnce();
+
+  const { container } = render(<Application />);
+
+  // Wait until the text "Archie Cohen" is displayed.
+  await waitForElement(() => getByText(container, "Archie Cohen"));
+
+  // Click the "Delete" button on the booked appointment.
+  const appointment = getAllByTestId(container, "appointment").find(
+    appointment => queryByText(appointment, "Archie Cohen")
+  );
+
+  fireEvent.click(queryByAltText(appointment, "Delete"));
+
+  // Check that the confirmation message is shown.
+  expect(
+    getByText(appointment, "Are you sure you would like to delete?")
+  ).toBeInTheDocument();
+
+  // Click the "Confirm" button on the confirmation.
+  fireEvent.click(queryByText(appointment, "Confirm"));
+
+  await waitForElement(() => getByText(appointment, "Could not cancel appointment."))
+  // expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
+  // expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+})
 
 
