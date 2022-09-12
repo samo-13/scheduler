@@ -162,9 +162,15 @@ export default function useApplicationData() {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   });
 
+  const [spots, setSpots] = useState(5)
+
+  console.log('STATE:', state)
+
+  // const [spots, setSpots] = useState(5)
 
   useEffect(() => {
     Promise.all([
@@ -186,38 +192,117 @@ export default function useApplicationData() {
   // console.log('STATE:', state)
 
   // -------------------------------------------------------------------------------------------
-  
-  // function updateSpots() {
+  // Both the visual design and the API use the term spots to mean appointments. 
+  // We can book up to five interviews per day, each one takes up a spot.
+  // https://bobbyhadz.com/blog/react-update-nested-state-object-property#:~:text=To%20update%20nested%20properties%20in,properties%20you%20need%20to%20update
+  // function updateSpots(id, cancel = false, add = true) {
   //   console.log('updateSpots')
+  //   console.log('updateSpots STATE', state)
+  //   console.log('updateSpots DAYS', state.days)
+  //   console.log('updateSpots NAME', state.day)
+
+  //   const dayName = state.day
+  //   console.log('MONDAY SPOTS:', state.days[0])
+  //   const days = 
+
+  //   // const spots = dayName.spots
+
+  //   // if (dayName === 'Monday') {
+  //   //   const dayObj = state.days.id[1]
+  //   //   console.log('STATE DAYS DAYID:', state.days.id[1])
+  //   //   const spots = dayObj.spots
+      
+  //     // if (cancel) {
+  //     //   spots--
+  //     // }
+      
+  //     // if (add) {
+  //     //   spots++
+  //     // }
+
+  //     // if (!add && !cancel) { 
+  //     //   spots
+  //     // }
+  //     // return spots
+  //   // }
+
+
+  //   if (dayName === 'Tuesday') {
+  //     const dayId = 2
+  //   }
+
+  //   if (dayName === 'Wednesday') {
+  //     const dayId = 3
+  //   }
+
+  //   if (dayName === 'Thursday') {
+  //     const dayId = 4
+  //   }
+
+  //   if (dayName === 'Friday') {
+  //     const dayId = 5
+  //   }
+
+
+
+    // if (id <= 5) { // monday
+    //   const dayId = 1
+    // }
+
+    // if (id >= 6 || id <= 10) { // tuesday
+    //   const dayId = 2
+    // }
+
+    // if (id >= 11 || id <= 15) { // wednesday
+    //   const dayId = 3
+    // }
+    
+    // if (id >= 16 || id <= 20) { // thursday
+    //   const dayId = 4
+    // }
+
+    // if (id >= 21 || id <= 25) { // friday
+    //   const dayId = 5
+    // }
+  // }
+
+  // updateSpots(2)
+
+  // function updateSpots(id) {
+
   // }
   
   // -------------------------------------------------------------------------------------------
 
   function bookInterview(id, interview) {
-    // console.log('BOOK INTERVIEW:', id, interview);
+    console.log('BOOK INTERVIEW ID:', id);
+    console.log('BOOK INTERVIEW INTERVIEW:', interview);
 
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
     };
+    console.log('bookInterview Appointment:', appointment)
 
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
+    console.log('bookInterview Appointments:', appointments)
 
     // setState({
     //   ...state,
     //   appointments
     // }); // call setState with our new state object
+
 console.log('APPOINTMENT TEST', appointment)
-    return axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
+    return axios.put(`http://localhost:8001/api/appointments/${id}`, appointment) // 
     .then(() => axios.get('http://localhost:8001/api/days')) // added to axios to update spots
     .then((response) => {
       const days = response.data
       setState({...state, appointments, days})
       // console.log('APPOINTMENTS:', appointments)
-      // console.log('BOOK INTERVIEW STATE:', state)
+      console.log('BOOK INTERVIEW STATE:', state)
       // console.log('BOOK INTERVIEW STATE.DAYS:', state.days)
       // console.log('STATE DAYS NAME:', state.days.name("Monday"))
       // console.log('BOOK INTERVIEW SPOTS TEST:', state.day.spots);
