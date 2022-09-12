@@ -1,5 +1,5 @@
 import React from "react";
-import { render, cleanup } from "@testing-library/react";
+import { render, cleanup, wait } from "@testing-library/react";
 import { fireEvent } from "@testing-library/react";
 import axios from "axios";
 
@@ -184,6 +184,41 @@ it("loads data, edits an interview and keeps the spots remaining for Monday the 
 // --------------------------------------------------------------------------------
 // Handling errors when either fails
 // --------------------------------------------------------------------------------
-it("shows the save error when failing to save an appointment", () => {
-  axios.put.mockRejectedValueOnce();
+  it("shows the save error when failing to save an appointment", () => {
+    axios.put.mockRejectedValueOnce();
 });
+
+  it("shows the save error when failing to save an appointment", async () => {
+      // Render the Application.
+  const { container } = render(<Application />);
+
+  // Wait until the text "Archie Cohen" is displayed.
+  await waitForElement(() => getByText(container, "Archie Cohen"));
+
+  // Click the "Edit" button on the first empty appointment.
+  const appointments = getAllByTestId(container, "appointment");
+  const appointment = appointments[0];
+
+  fireEvent.click(getByAltText(appointment, "Add"));
+
+  // Enter the name "Lydia Miller-Jones" into the input with the placeholder "Enter Student Name".
+  fireEvent.change(getByPlaceholderText(appointment, /Enter Student Name/i), {
+    target: { value: "Lydia Miller-Jones" }
+  });
+
+  // Click the first interviewer in the list.
+  fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
+  
+  // Click the "Save" button on that same appointment.
+  fireEvent.click(getByText(appointment, "Save"));
+
+  // Check that the element with the text "Saving" is displayed.
+  expect(getByText(appointment, "SAVING")).toBeInTheDocument();
+
+  await waitForElement(() => getByText(appointment, "Could not save appointment."))
+})
+
+  it("shows the delete error when failing to delete an existing appointment", () => {
+}) 
+
+
