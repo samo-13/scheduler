@@ -87,7 +87,7 @@ export default { // export our fake axios library
   }),
   // We use our mock implementation of axios to isolate our tests to the client code. All of the data that is retrieved using GET requests is static and predictable. When a user books or cancels an interview, we request to PUT or DELETE the appointment resource.
 
-// Mocking axios.put or axios.delete will be similar to the approach taken with axios.get. 
+// Mocking axios.put or axios.delete is similar to t axios.get. 
 // We edit the src/__mocks__/axios.js to include a put key on the exported object. 
   put: jest.fn(url => { 
       return Promise.resolve({
@@ -101,7 +101,7 @@ export default { // export our fake axios library
       return Promise.resolve({
         status: 204, 
         statusText: "No Content",
-        
+        data: fixtures.days[0].spots = 2 // update appointment spots to 2
       })
     })
   }

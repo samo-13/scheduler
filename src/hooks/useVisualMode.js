@@ -78,6 +78,7 @@ export default function useVisualMode(initial) { // take in an initial mode
     // console.log('HISTORY IN REPLACE TRANSITION AFTER SETHISTORY:', history)
     // console.log('MODE:', mode)
     setMode(mode)
+    console.log('MODE TEST:', mode)
     return mode
   }
 

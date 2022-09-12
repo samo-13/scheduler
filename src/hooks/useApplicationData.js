@@ -93,8 +93,8 @@ console.log('APPOINTMENT TEST', appointment)
       [id]: appointment
     };
     
-    return axios.delete(`/api/appointments/${id}`, appointment)
-    .then(() => axios.get(`/api/days`)) // added to axios to update spots
+    return axios.delete(`http://localhost:8001/api/appointments/${id}`, appointment)
+    .then(() => axios.get(`http://localhost:8001/api/days`)) // added to axios to update spots
     .then((response) => {
       const days = response.data
       // console.log(`in AXIOS PUT request for /api/appointments/${id}`)
