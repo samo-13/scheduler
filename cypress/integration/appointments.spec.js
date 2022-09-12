@@ -30,6 +30,16 @@ describe("Appointments", () => {
       .clear() // https://docs.cypress.io/api/commands/clear#Syntax
       .type("Lydia Miller-Jones");
     cy.get('[alt="Tori Malcolm"]').click();
+    cy.contains("Save").click();
+  
+    cy.contains(".appointment__card--show", "Lydia Miller-Jones");
+    cy.contains(".appointment__card--show", "Tori Malcolm");
+  })
 
+  it("should cancel an interview", () => {
+    cy.get("[alt=Delete]") // https://docs.cypress.io/api/commands/hover#Invoke 
+      .first()
+      .click
+        ({ force: true })
   })
  });
