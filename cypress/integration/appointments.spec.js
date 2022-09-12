@@ -41,5 +41,6 @@ describe("Appointments", () => {
       .first()
       .click
         ({ force: true })
+    cy.contains("Confirm").click();
   })
  });
