@@ -23,8 +23,13 @@ describe("Appointments", () => {
 
   it("should edit an interview", () => {
     cy.get("[alt=Edit]") // https://docs.cypress.io/api/commands/hover#Invoke 
-    .first()
-    .click
-    ({ force: true })
+      .first()
+      .click
+      ({ force: true })
+    cy.get("[data-testid=student-name-input]")
+      .clear() // https://docs.cypress.io/api/commands/clear#Syntax
+      .type("Lydia Miller-Jones");
+    cy.get('[alt="Tori Malcolm"]').click();
+
   })
  });
