@@ -1,6 +1,8 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import { fireEvent } from "@testing-library/react";
+import axios from "axios";
+
 
 import { 
   waitForElement,
@@ -182,3 +184,6 @@ it("loads data, edits an interview and keeps the spots remaining for Monday the 
 // --------------------------------------------------------------------------------
 // Handling errors when either fails
 // --------------------------------------------------------------------------------
+it("shows the save error when failing to save an appointment", () => {
+  axios.put.mockRejectedValueOnce();
+});
