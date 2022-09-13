@@ -89,8 +89,8 @@ it("defaults to Monday and changes the schedule when a new day is selected", () 
 
   console.log(prettyDOM(container))
 
-  // expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
-  expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+  expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
+  // expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
   });
 
 
@@ -128,8 +128,8 @@ it("loads data, cancels an interview and increases the spots remaining for Monda
     queryByText(day, "Monday")
   );
 
-  // expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
-  expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+  expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
+  // expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
 });
 })
 

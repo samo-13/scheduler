@@ -18,7 +18,7 @@ export default function useApplicationData() {
 
   // const [spots, setSpots] = useState(5)
 
-  console.log('useApplicationData state:', state)
+  // console.log('useApplicationData state:', state)
 
   useEffect(() => {
     Promise.all([
@@ -26,6 +26,7 @@ export default function useApplicationData() {
       axios.get('http://localhost:8001/api/appointments'),
       axios.get('http://localhost:8001/api/interviewers')
     ]).then((all) => {
+      // console.log('APPOINTMENT TEST', all[1])
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
     })
   }, [])
@@ -38,24 +39,30 @@ export default function useApplicationData() {
   // Both the visual design and the API use the term spots to mean appointments. 
   // We can book up to five interviews per day, each one takes up a spot.
   // https://bobbyhadz.com/blog/react-update-nested-state-object-property#:~:text=To%20update%20nested%20properties%20in,properties%20you%20need%20to%20update
-  
-  function updateSpots() {
-    console.log(updateSpots);
-  }
+  // From API database: (SELECT sum(CASE WHEN interviews.id IS NULL THEN 1 ELSE 0 END) FROM appointments LEFT JOIN interviews ON interviews.appointment_id = appointments.id WHERE appointments.day_id = days.id)::int AS spots
 
-  updateSpots()
+  function updateSpots(appointments) {
+    axios.get('http://localhost:8001/api/days') // added to axios to update spots
+      .then((response) => {
+        const days = response.data
+        console.log('updateSpots days:', days)
+        setState({...state, appointments, days})
+      })
+    return
+  }
 
   // -------------------------------------------------------------------------------------------
 
   function bookInterview(id, interview) { // makes an HTTP request and updates the local state.
-    console.log('BOOK INTERVIEW ID:', id);
-    console.log('BOOK INTERVIEW INTERVIEW:', interview);
+    console.log('bookInterview id:', id);
+    console.log('bookInterview interview:', interview);
 
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
     };
 
+    console.log('state.appointments:', state.appointments)
     const appointments = {
       ...state.appointments,
       [id]: appointment
@@ -63,18 +70,22 @@ export default function useApplicationData() {
     
       console.log('bookInterview Appointment:', appointment)
       console.log('bookInterview Appointments:', appointments)
-      
-    return axios.put(`http://localhost:8001/api/appointments/${id}`, appointment) // 
-    .then(() => axios.get('http://localhost:8001/api/days')) // added to axios to update spots
-    .then((response) => {
-      const days = response.data
-      setState({...state, appointments, days})
-        
-        console.log('bookInterview state:', state)
-        console.log('bookInterview days:', days)
-        console.log('bookInterview appointments:', appointments)
+    
+    const result = axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
+    return result
+    .then(updateSpots(appointments))
+    
+    
 
-    })
+    // .then(() => axios.get('http://localhost:8001/api/days')) // added to axios to update spots
+    // .then((response) => {
+    //   const days = response.data
+    //   setState({...state, appointments, days})
+        
+    //     console.log('bookInterview state:', state)
+    //     console.log('bookInterview appointments:', appointments)
+    //     console.log('bookInterview days:', days)
+    // })
   }
 
   // -------------------------------------------------------------------------------------------
@@ -94,20 +105,17 @@ export default function useApplicationData() {
       [id]: appointment
     };
     
-    return axios.delete(`http://localhost:8001/api/appointments/${id}`, appointment)
-    .then(() => axios.get(`http://localhost:8001/api/days`)) // added to axios to update spots
-    .then((response) => {
-      const days = response.data
-      setState({...state, appointments, days})
-
-        console.log('cancelInterview appointments:', appointments)
-        console.log('cancelInterview days:', days)
-    }
-  )}
+    const result = axios.delete(`http://localhost:8001/api/appointments/${id}`, appointment)
+    return result
+    .then(updateSpots(appointments))
+    
+    
+  }
 
   return {
     state, 
     setDay,
+    updateSpots,
     bookInterview,
     cancelInterview
   }

@@ -75,6 +75,7 @@ export function getAppointmentsForDay(state, day) {
    if (findDayIndex > -1) {
     const daysAppointments = daysArray[findDayIndex].appointments;
     const apps = daysAppointments.map(appointment_id => {
+      console.log('STATE', state)
     return state.appointments[appointment_id];
     });
     return apps;
