@@ -46,18 +46,27 @@ export default function Appointment(props) {
     
   }
 
+  // -------------------------------------------------------------------------------------------
+
+  // function cancel() {
+  //   transition(DELETING)
+  //   .then(() => deleteAppointment())
+  // }
+
   function deleteAppointment() {
-    transition(CONFIRM)
-  
+    transition(DELETING)
+
     props
     .cancelInterview(props.id)
-    .then(() => {transition(DELETING, true); console.log('DELETING DELETING DELETING')})
-    .then(() => transition(EMPTY, true))
+    .then(() => transition(EMPTY))
     .catch(error => transition(ERROR_DELETE, true))
+    // .then(() => transition(EMPTY, true))
     
     console.log(`Appointment with id: ${props.id} has been deleted`)
-    transition(EMPTY, true)
+    // transition(EMPTY, true)
   }
+
+  // -------------------------------------------------------------------------------------------
 
   function editAppointment() {
     transition(EDIT, true)
@@ -106,7 +115,7 @@ export default function Appointment(props) {
       {mode === CONFIRM && 
         <Confirm
           onCancel={() => back()}
-          onConfirm={() => deleteAppointment()}
+          onConfirm={deleteAppointment}
         />
       }
 

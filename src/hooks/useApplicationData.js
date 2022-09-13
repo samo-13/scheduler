@@ -178,12 +178,7 @@ export default function useApplicationData() {
       axios.get('http://localhost:8001/api/appointments'),
       axios.get('http://localhost:8001/api/interviewers')
     ]).then((all) => {
-      // console.log(all[1].data)
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
-      // console.log('ALL:', all)
-      // console.log('APPOINTMENTS TEST:', all[1].data);
-      // console.log('DAYS TEST:', all[0].data.day);
-      // console.log('SPOTS TEST:', all[0].data[0].spots);
     })
   }, [])
   
@@ -195,6 +190,7 @@ export default function useApplicationData() {
   // Both the visual design and the API use the term spots to mean appointments. 
   // We can book up to five interviews per day, each one takes up a spot.
   // https://bobbyhadz.com/blog/react-update-nested-state-object-property#:~:text=To%20update%20nested%20properties%20in,properties%20you%20need%20to%20update
+  
   // function updateSpots(id, cancel = false, add = true) {
   //   console.log('updateSpots')
   //   console.log('updateSpots STATE', state)
@@ -288,14 +284,14 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    console.log('bookInterview Appointments:', appointments)
+      console.log('bookInterview Appointments:', appointments)
 
     // setState({
     //   ...state,
     //   appointments
     // }); // call setState with our new state object
 
-console.log('APPOINTMENT TEST', appointment)
+      console.log('APPOINTMENT TEST', appointment)
     return axios.put(`http://localhost:8001/api/appointments/${id}`, appointment) // 
     .then(() => axios.get('http://localhost:8001/api/days')) // added to axios to update spots
     .then((response) => {
@@ -315,7 +311,6 @@ console.log('APPOINTMENT TEST', appointment)
   // --- it uses the appointment id to find the right appointment slot and set it's interview data to null.
   // Add the rest of the local and remote delete behaviour to the Appointment component.
   
-
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
@@ -331,7 +326,6 @@ console.log('APPOINTMENT TEST', appointment)
     .then(() => axios.get(`http://localhost:8001/api/days`)) // added to axios to update spots
     .then((response) => {
       const days = response.data
-      // console.log(`in AXIOS PUT request for /api/appointments/${id}`)
       setState({...state, appointments, days})
       // console.log('APPOINTMENTS:', appointments)
       // console.log('cancelInterview DAYS:', days)
