@@ -36,7 +36,7 @@
 <img alt="Scheduler (Toggle Days)" src="">
 
 ### Scheduler (Toggle Interviewers)
-<img alt="Scheduler Toggle interviewers" src="">
+<img alt="Scheduler Toggle Interviewers" src="">
 
 ## Getting Started
 
@@ -59,3 +59,8 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Dependencies
+- axios
+- @testing-library/react-hooks
+- react-test-renderer
