@@ -4,6 +4,7 @@
 - Built for learning purposes at [Lighthouse Labs](https://www.lighthouselabs.ca/). 
 - It is a React application that allows users to book and cancel interviews. 
 - It combines a concise API with a WebSocket server to build a real-time experience.
+- Built using [this provided API](https://github.com/lighthouse-labs/scheduler-api)
 
 ## About Interview Scheduler
 
