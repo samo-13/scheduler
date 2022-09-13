@@ -105,7 +105,7 @@ export function getInterviewersForDay(state, day) {
 
    if (findDayIndex > -1) {
     const daysInterviewers = daysArray[findDayIndex].interviewers;
-    console.log('daysInterviewers:', daysInterviewers)
+    // console.log('daysInterviewers:', daysInterviewers)
     const interviewersArray = daysInterviewers.map(interviewer_id => {
     return state.interviewers[interviewer_id];
     });
