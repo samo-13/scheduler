@@ -1,7 +1,8 @@
 # Interview Scheduler
 
 ## Project
-- Built for learning purposes at LHL. It is a React application that allows users to book and cancel interviews. 
+- Built for learning purposes at [Lighthouse Labs](https://www.lighthouselabs.ca/). 
+- It is a React application that allows users to book and cancel interviews. 
 - It combines a concise API with a WebSocket server to build a real-time experience.
 
 ## About Interview Scheduler
@@ -14,7 +15,30 @@
 - Appointments can also be edited or deleted. 
 - The front end is built with React and makes requests to an API to fetch and store appointment data from a database.
 
-## Setup
+## Final Product
+
+### Scheduler (Empty)
+<img alt="Scheduler Empty No Appointments" src="">
+
+### Scheduler (Book Appointment Form)
+<img alt="Scheduler Book Appointment Form" src="">
+
+### Scheduler (Confirm Delete Appointment)
+<img alt="Scheduler (Confirm Delete Appointment)" src="">
+
+### Scheduler (Delete Appointment)
+<img alt="Scheduler Delete Appointment" src="">
+
+### Scheduler (Save Appointment)
+<img alt="Scheduler (Save Appointment)" src="">
+
+### Scheduler (Toggle Days)
+<img alt="Scheduler (Toggle Days)" src="">
+
+### Scheduler (Toggle Interviewers)
+<img alt="Scheduler Toggle interviewers" src="">
+
+## Getting Started
 
 Install dependencies with `npm install`.
 
