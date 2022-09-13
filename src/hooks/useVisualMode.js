@@ -10,14 +10,13 @@ export default function useVisualMode(initial) { // take in an initial mode
   // As we interact with the application, we use the "back" and "transition" functions to change between the modes.
   // ---------------------------------------------------------------------------
 
-  // A transition function allows  us to advance to any other mode
-  // --- The transition function might be used to transition from the "EMPTY" component to the "CREATE" component when a user would like to create a new appointment in a currently empty time slot. 
+  // Allows  us to advance to any other mode
+  // --- e.g., transition from the "EMPTY" component to the "CREATE" component when a user would like to create a new appointment in a currently empty time slot. 
 
   const transition = function(mode, replace = false) {
     if (replace === true) {
       setHistory(() => [...history, mode]) 
       setMode(mode)
-        console.log('MODE TEST:', mode)
       return mode
     }
 
@@ -29,9 +28,9 @@ export default function useVisualMode(initial) { // take in an initial mode
   }
 
 // ---------------------------------------------------------------------------
-
-// A back function allows us to return to the previous mode
-// --- The back function is used to pop back to the most recent component, like backing out of the "CONFIRM" component by clicking "Cancel" to go back to the "SHOW" component.
+// Allows us to return to the previous mode
+// --- Pops back to the most recent component 
+// --- e.g., backing out of the "CONFIRM" component by clicking "Cancel" to go back to the "SHOW" component
 
   const back = function() {
     history.pop()

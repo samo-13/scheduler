@@ -21,8 +21,6 @@ import "components/Appointment/styles.scss";
 
 export default function Show(props) {
   const student = props.student
-  // console.log('PROPS:', props);
-  // console.log('INTERVIEWER:', props.interviewer.name);
   const interviewer = props.interviewer.name;
 
   return (

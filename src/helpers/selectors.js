@@ -75,43 +75,34 @@ export function getAppointmentsForDay(state, day) {
    if (findDayIndex > -1) {
     const daysAppointments = daysArray[findDayIndex].appointments;
     const apps = daysAppointments.map(appointment_id => {
-      console.log('STATE', state)
     return state.appointments[appointment_id];
     });
     return apps;
-    // return daysAppointments;
    }
-   
   return [];
 };
 
 // -----------------------------------------------------------------------------------------------
 
 export function getInterviewersForDay(state, day) {
-  // let dayAppointmentsArray = [];
 
   if (state.days.length < 1) {
     return [];
   };
-
   //  // If there are no appointments on the given day, our days data will be empty -- return an empty array.
-
-  //  const dayName = state.days.name
   const daysArray = state.days;
   const findDayIndex = daysArray.map(daysObject => daysObject.name).indexOf(day)
-  
+
    if (findDayIndex === -1) {
     return [];
    }
 
    if (findDayIndex > -1) {
     const daysInterviewers = daysArray[findDayIndex].interviewers;
-    // console.log('daysInterviewers:', daysInterviewers)
     const interviewersArray = daysInterviewers.map(interviewer_id => {
     return state.interviewers[interviewer_id];
     });
     return interviewersArray;
-    // return daysAppointments;
    }
    
   return [];
@@ -131,16 +122,11 @@ export function getInterviewersForDay(state, day) {
 // }
 
 export function getInterview(state, interview) {
-    // console.log("BEING CALLED")
-    // const appointments = state.appointments;
-  // console.log('INTERVIEW:', interview)
-    // let interviewObject = {};
 
     if (interview === null) {
       return null;
     }
     
-    // interview comes in as state.appointments["2"].interview already *** 
     if (interview !== null) {
       const newInterviewObj = {}
       const interviewerID = interview.interviewer
@@ -152,5 +138,3 @@ export function getInterview(state, interview) {
 
   return null;
 }
-
-// console.log(getInterview(state, state.appointments["3"].interview))

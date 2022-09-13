@@ -31,6 +31,7 @@ export default function Appointment(props) {
 
   // Call the props.bookInterview function with the appointment id and interview as arguments from within the save function. 
   // Verify that the id and interview values are correct in the console output.
+  
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -48,11 +49,6 @@ export default function Appointment(props) {
 
   // -------------------------------------------------------------------------------------------
 
-  // function cancel() {
-  //   transition(DELETING)
-  //   .then(() => deleteAppointment())
-  // }
-
   function deleteAppointment() {
     transition(DELETING)
 
@@ -60,10 +56,6 @@ export default function Appointment(props) {
     .cancelInterview(props.id)
     .then(() => transition(EMPTY))
     .catch(error => transition(ERROR_DELETE, true))
-    // .then(() => transition(EMPTY, true))
-    
-    console.log(`Appointment with id: ${props.id} has been deleted`)
-    // transition(EMPTY, true)
   }
 
   // -------------------------------------------------------------------------------------------

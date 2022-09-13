@@ -8,11 +8,6 @@ import { getAppointmentsForDay, getInterviewersForDay, getInterview } from "help
 import useApplicationData from 'hooks/useApplicationData';
 
 // ----------------------------------------------------------------
-// const appointmentsTest = Object.values(appointments)
-// console.log('TYPEOF:', typeof(appointmentsTest))
-// getAppointmentsForDay();
-// console.log('state', state)
-// ----------------------------------------------------------------
 
 export default function Application(props) {
 
