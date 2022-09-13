@@ -18,25 +18,25 @@
 ## Final Product
 
 ### Scheduler (Empty)
-<img alt="Scheduler Empty No Appointments" src="">
+<img alt="Scheduler Empty No Appointments" src="https://github.com/samo-13/scheduler/blob/master/docs/scheduler-empty-day.png">
 
-### Scheduler (Book Appointment Form)
-<img alt="Scheduler Book Appointment Form" src="">
+### Scheduler (Booked Appointments)
+<img alt="Scheduler Booked Appointments" src="https://github.com/samo-13/scheduler/blob/master/docs/scheduler-two-appointments.png?raw=true">
 
-### Scheduler (Confirm Delete Appointment)
-<img alt="Scheduler (Confirm Delete Appointment)" src="">
+### Scheduler (Book Appointment)
+<img alt="Scheduler Book Appointment Form" src="https://github.com/samo-13/scheduler/blob/master/docs/scheduler-add-new-appointment.gif">
+
+### Scheduler (Edit Appointment)
+<img alt="Scheduler Delete Appointment" src="https://github.com/samo-13/scheduler/blob/master/docs/scheduler-edit-appointment.gif">
 
 ### Scheduler (Delete Appointment)
-<img alt="Scheduler Delete Appointment" src="">
-
-### Scheduler (Save Appointment)
-<img alt="Scheduler (Save Appointment)" src="">
+<img alt="Scheduler Delete Appointment" src="https://github.com/samo-13/scheduler/blob/master/docs/scheduler-delete-appointment.gif">
 
 ### Scheduler (Toggle Days)
-<img alt="Scheduler (Toggle Days)" src="">
+<img alt="Scheduler (Toggle Days)" src="https://github.com/samo-13/scheduler/blob/master/docs/scheduler-toggle-days.gif">
 
-### Scheduler (Toggle Interviewers)
-<img alt="Scheduler Toggle Interviewers" src="">
+### Scheduler (Fill Day)
+<img alt="Scheduler Toggle Interviewers" src="https://github.com/samo-13/scheduler/blob/master/docs/scheduler-no-appointments-remaining.gif">
 
 ## Getting Started
 
