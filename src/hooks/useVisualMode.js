@@ -29,13 +29,22 @@ export default function useVisualMode(initial) { // take in an initial mode
 
 // ---------------------------------------------------------------------------
 // Allows us to return to the previous mode
-// --- Pops back to the most recent component 
+// --- Pops back to the most recent component
 // --- e.g., backing out of the "CONFIRM" component by clicking "Cancel" to go back to the "SHOW" component
 
   const back = function() {
-    const newHistory = [...history].pop();
-    setHistory(newHistory);
-    return setMode(newHistory[newHistory.length-1])
+    // if (history.length === 1) {
+    //   setMode('EMPTY')
+    //   return mode
+    // }
+
+    if (history.length > 1){
+      const newHistory = history.splice(0, history.length-1)
+      console.log('NEW HISTORY', newHistory)
+      console.log(`Back to ${newHistory[newHistory.length-1]} from ${mode}.`)
+      setMode(newHistory[newHistory.length-1])
+      setHistory(() => [...newHistory])
+    }
   }
 
 // ---------------------------------------------------------------------------
