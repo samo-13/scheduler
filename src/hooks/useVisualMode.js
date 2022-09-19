@@ -33,7 +33,7 @@ export default function useVisualMode(initial) { // take in an initial mode
 // --- e.g., backing out of the "CONFIRM" component by clicking "Cancel" to go back to the "SHOW" component
 
   const back = function() {
-    if (history.length > 1){
+    if (history.length > 1) {
       const newHistory = history.splice(0, history.length-1)
       // console.log(`Back to ${newHistory[newHistory.length-1]} from ${mode}.`)
       setMode(newHistory[newHistory.length-1])
