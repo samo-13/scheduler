@@ -56,15 +56,12 @@
 // // -- Do validation.
 
 export function getAppointmentsForDay(state, day) {
-  // let dayAppointmentsArray = [];
 
   if (state.days.length < 1) {
     return [];
   };
 
-  //  // If there are no appointments on the given day, our days data will be empty -- return an empty array.
-
-  //  const dayName = state.days.name
+  // If there are no appointments on the given day, our days data will be empty -- return an empty array.
   const daysArray = state.days;
   const findDayIndex = daysArray.map(daysObject => daysObject.name).indexOf(day)
   
@@ -89,7 +86,8 @@ export function getInterviewersForDay(state, day) {
   if (state.days.length < 1) {
     return [];
   };
-  //  // If there are no appointments on the given day, our days data will be empty -- return an empty array.
+  
+  // If there are no appointments on the given day, our days data will be empty -- return an empty array.
   const daysArray = state.days;
   const findDayIndex = daysArray.map(daysObject => daysObject.name).indexOf(day)
 

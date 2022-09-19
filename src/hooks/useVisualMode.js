@@ -33,8 +33,9 @@ export default function useVisualMode(initial) { // take in an initial mode
 // --- e.g., backing out of the "CONFIRM" component by clicking "Cancel" to go back to the "SHOW" component
 
   const back = function() {
-    history.pop()
-    return setMode(history[history.length-1])
+    const newHistory = [...history].pop();
+    setHistory(newHistory);
+    return setMode(newHistory[newHistory.length-1])
   }
 
 // ---------------------------------------------------------------------------

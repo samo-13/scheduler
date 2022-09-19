@@ -4,7 +4,6 @@ import Header from "components/Appointment/Header.js";
 import Show from "components/Appointment/Show.js";
 import Empty from "components/Appointment/Empty.js";
 import Form from "components/Appointment/Form.js";
-// import classNames from "classnames";
 import useVisualMode from "hooks/useVisualMode";
 import Status from "components/Appointment/Status.js";
 import Confirm from "components/Appointment/Confirm.js";
@@ -31,7 +30,7 @@ export default function Appointment(props) {
 
   // Call the props.bookInterview function with the appointment id and interview as arguments from within the save function. 
   // Verify that the id and interview values are correct in the console output.
-  
+
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -124,14 +123,14 @@ export default function Appointment(props) {
       {mode === ERROR_SAVE && (
         <Error
           message={"Could not save appointment."}
-          onClose={back}
+          onClose={() => back()}
         />
       )}
 
       {mode === ERROR_DELETE && (
         <Error
           message={"Could not cancel appointment."}
-          onClose={back}
+          onClose={() => back()}
         />
       )}
 
